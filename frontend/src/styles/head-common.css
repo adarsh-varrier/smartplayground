@@ -1,0 +1,32 @@
+  
+  /* Navbar customizations */
+  .navbar {
+    border-bottom: 2px solid #3498db !important; /* Add a blue border at the bottom */
+    z-index: 1000; /* Make sure the header is above other content */
+  }
+  
+  /* Navbar brand style (SMARTPLAY) */
+  .navbar-brand {
+    font-size: 1.5rem !important; /* Change font size for brand */
+    color: #3498db !important; /* Set brand color */
+  }
+  
+  /* Navbar link styling */
+  .navbar-nav .nav-item .nav-link {
+    color: #ffffff !important; /* Set text color to white */
+    font-weight: bold !important; /* Make links bold */
+    padding: 10px 15px !important; /* Add padding to links */
+    transition: color 0.3s ease; /* Smooth transition for color on hover */
+  }
+  
+  /* Navbar link hover effect */
+  .navbar-nav .nav-item .nav-link:hover {
+    color: #3498db !important; /* Change link color on hover */
+    background-color: rgba(255, 255, 255, 0.1) !important; /* Add a subtle background on hover */
+    border-radius: 5px !important; /* Rounded corners for hover effect */
+  }
+  
+  /* Customize the navbar-toggler */
+  .navbar-toggler-icon {
+    background-color: #3498db !important; /* Blue toggler icon */
+  }
