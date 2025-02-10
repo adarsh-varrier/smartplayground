@@ -13,6 +13,9 @@ import OwnerDashboard from './components/ownerdash';
 import AdminDashboard from './components/admindash';
 import PrivateRoute from './components/reuse/PrivateRoute';
 import Settings from './components/pages/settings';
+import Ownerplay from './components/pages/playg-owner';
+import PlayReg from './components/pages/playg-reg';
+import PlaygroundDetail from './components/pages/playg-owner-details';
 
 
 
@@ -30,6 +33,9 @@ function App() {
           <Route path="/owner-dashboard" element={<OwnerDashboard />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/ownerplay" element={<Ownerplay />} />
+          <Route path="/play-registration" element={<PlayReg />} />
+          <Route path="/playground/:id" element={<PlaygroundDetail />} />
         </Route>
       </Routes>
     </Router>

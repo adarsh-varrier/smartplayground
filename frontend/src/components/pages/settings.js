@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../reuse/user-side";
 import { Link } from "react-router-dom";
+import Sidebar2 from "../reuse/owner-side";
 
 const Settings = () => {
   const [userdetails, setUserDetails] = useState(null);
@@ -122,7 +123,7 @@ const Settings = () => {
         </nav>
       </div>
       <div className='dashboard-container'>
-        <Sidebar />
+      {userdetails && userdetails.user_type === 'customer' ? <Sidebar /> : <Sidebar2 />}
         <div className='dashboard-content'>
           <h1>Settings</h1>
           <h3>Your Details</h3>

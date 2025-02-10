@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',  # Add this line
     'smartplay',  # Add this for the weather app
+    'holder',
 ]
 
 MIDDLEWARE = [
@@ -157,3 +158,6 @@ REST_FRAMEWORK = {
 OPENWEATHER_API_KEY = 'f3b13b4277f15c3c54e8584794450117'
 
 LOGIN_URL = '/accounts/login/' 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

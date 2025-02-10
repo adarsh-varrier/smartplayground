@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/user-dash.css';  
-import '../styles/head-common.css'; 
+
 import { Link } from 'react-router-dom'; 
 
 function DashHead() {
