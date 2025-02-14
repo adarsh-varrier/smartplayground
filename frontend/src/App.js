@@ -16,6 +16,9 @@ import Settings from './components/pages/settings';
 import Ownerplay from './components/pages/playg-owner';
 import PlayReg from './components/pages/playg-reg';
 import PlaygroundDetail from './components/pages/playg-owner-details';
+import CustomerPlayg from './components/pages/playg-customer';
+import PlaygroundDetail2 from './components/pages/playg-custo-view';
+import Ticket from './components/pages/ticket';
 
 
 
@@ -36,6 +39,9 @@ function App() {
           <Route path="/ownerplay" element={<Ownerplay />} />
           <Route path="/play-registration" element={<PlayReg />} />
           <Route path="/playground/:id" element={<PlaygroundDetail />} />
+          <Route path="/playglist" element={<CustomerPlayg />} />
+          <Route path="/playground-customer/:id" element={<PlaygroundDetail2 />} />
+          <Route path="/ticket" element={<Ticket />} />
         </Route>
       </Routes>
     </Router>

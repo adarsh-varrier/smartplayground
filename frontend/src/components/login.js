@@ -33,6 +33,7 @@ const Login = () => {
       );
 
       localStorage.setItem("authToken", response.data.token); // Store token
+      localStorage.setItem("userId", response.data.userId);    // Storing the user ID
   
       if (response.data.user_type === "Customer") {
         navigate("/customer-dashboard");

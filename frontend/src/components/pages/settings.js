@@ -123,7 +123,7 @@ const Settings = () => {
         </nav>
       </div>
       <div className='dashboard-container'>
-      {userdetails && userdetails.user_type === 'customer' ? <Sidebar /> : <Sidebar2 />}
+      {userdetails && userdetails.user_type === 'Customer' ? <Sidebar /> : <Sidebar2 />}
         <div className='dashboard-content'>
           <h1>Settings</h1>
           <h3>Your Details</h3>

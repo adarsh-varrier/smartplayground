@@ -40,7 +40,6 @@ class LoginView(APIView):
             return Response({"message": "Email and password are required"}, status=status.HTTP_400_BAD_REQUEST)
 
         user = authenticate(request, email=email, password=password)
-
         if user:
             token, _ = Token.objects.get_or_create(user=user)  # Generate token
 
@@ -66,8 +65,10 @@ class UserDetailsView(APIView):
 
     def get(self, request):
         user = request.user  # Get the current logged-in user
+        identification = user.id
         return Response({
             'username': user.username,
+            'user_id': identification,
         })
 
 @api_view(['GET', 'PUT'])

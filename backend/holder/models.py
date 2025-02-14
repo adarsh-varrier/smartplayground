@@ -1,3 +1,6 @@
+# holder/models.py
+import random
+import string
 from django.db import models
 from smartplay.models import CustomUser
 
@@ -26,3 +29,38 @@ class Playground(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class Booking(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('rejected', 'Rejected'),
+    ]
+
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="bookings")
+    playground = models.ForeignKey("Playground", on_delete=models.CASCADE, related_name="bookings")
+    ticket_number = models.CharField(max_length=7, unique=True, editable=False, blank=True)
+    time_slot = models.TimeField()
+    date = models.DateField()
+    num_players = models.PositiveIntegerField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    def generate_ticket_number(self):
+        """
+        Generate a random 5-digit number followed by 2 random uppercase letters.
+        Example: 12345AB
+        """
+        digits = "".join(random.choices(string.digits, k=5))
+        letters = "".join(random.choices(string.ascii_uppercase, k=2))
+        return f"{digits}{letters}"
+
+    def save(self, *args, **kwargs):
+        if not self.ticket_number:  # Generate only if not already set
+            self.ticket_number = self.generate_ticket_number()
+            while Booking.objects.filter(ticket_number=self.ticket_number).exists():
+                self.ticket_number = self.generate_ticket_number()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Booking {self.ticket_number} - {self.user.username} at {self.playground.name}"

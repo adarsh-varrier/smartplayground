@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom'; 
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 function DashHead() {
   const [username, setUsername] = useState('');
-
+  const [user_id, setUserId] = useState('');
   useEffect(() => {
     // Fetch the logged-in user's details
     const token = localStorage.getItem('authToken');  // Get the token from localStorage
@@ -32,15 +34,18 @@ function DashHead() {
       })
       .then(data => {
         setUsername(data.username);  // Set the username from the response data
+        setUserId(data.user_id)
+        localStorage.setItem("userId",data.user_id);
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
       });
-
+      
   }, []);
 
   return (
     <div>
+        {console.log("user id:",user_id)}
         <div className='head-customer'>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
@@ -50,10 +55,32 @@ function DashHead() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
-                    <li className="nav-item">
-                        <Link className="nav-link active" to="">{username ? username : 'Loading...'}</Link>  {/* Use Link for navigation */}
-                    </li>
+                      <li className="nav-item dropdown">
+                        <Link 
+                          className="nav-link dropdown-toggle" 
+                          to="#" 
+                          id="navbarDropdown" 
+                          role="button" 
+                          data-bs-toggle="dropdown" 
+                          aria-expanded="false"
+                        >
+                          {username ? username : 'Loading...'}
+                        </Link>
+                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li>
+                            <Link className="dropdown-item" to="/profile">Profile</Link>
+                          </li>
+                          <li>
+                            <Link className="dropdown-item" to="/ticket">Ticket</Link>
+                          </li>
+                          <li><hr className="dropdown-divider" /></li>
+                          <li>
+                            <Link className="dropdown-item" to="/logout">Logout</Link>
+                          </li>
+                        </ul>
+                      </li>
                     </ul>
+
                 </div>
                 </div>
             </nav>

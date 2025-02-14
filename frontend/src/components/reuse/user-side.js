@@ -14,12 +14,12 @@ function Sidebar() {
           </Link>
         </li>
         <li className='path'>
-          <Link to="/settings">
+          <Link to="/playglist">
           <FaFootballBall /> Playgrounds
           </Link>
         </li>
         <li className='path'>
-          <Link to="/settings">
+          <Link to="/physicaldetails">
             <FaChild /> Child play
           </Link>
         </li>
