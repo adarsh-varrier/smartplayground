@@ -19,6 +19,11 @@ import PlaygroundDetail from './components/pages/playg-owner-details';
 import CustomerPlayg from './components/pages/playg-customer';
 import PlaygroundDetail2 from './components/pages/playg-custo-view';
 import Ticket from './components/pages/ticket';
+import Confirmation from './components/pages/confirmation';
+import Childplay from './components/pages/childplay';
+import Childplay2 from './components/pages/child-owner';
+import Games from './components/pages/Games';
+import FAQ from './components/pages/FAQ';
 
 
 
@@ -42,6 +47,11 @@ function App() {
           <Route path="/playglist" element={<CustomerPlayg />} />
           <Route path="/playground-customer/:id" element={<PlaygroundDetail2 />} />
           <Route path="/ticket" element={<Ticket />} />
+          <Route path="/confirmation" element={<Confirmation />} />
+          <Route path="/childplay" element={<Childplay />} />
+          <Route path="/childplay-owner" element={<Childplay2 />} />
+          <Route path="/Games" element={<Games />} />
+          <Route path="/FAQ" element={<FAQ />} />
         </Route>
       </Routes>
     </Router>

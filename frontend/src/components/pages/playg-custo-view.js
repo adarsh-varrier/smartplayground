@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import DashHead from "../reuse/header2";
 import Sidebar from "../reuse/user-side";
+import WeatherData2 from '../reuse/weather2';
 
 function PlaygroundDetail2() {
     const { id } = useParams();  // Access the playground ID from the URL
@@ -188,6 +189,11 @@ function PlaygroundDetail2() {
                                 <p><strong>Available Time Slot:</strong> {playground.time_slot_start} to {playground.time_slot_end}</p>
                                 <p><strong>Number of Players:</strong> {playground.num_players}</p>
                             </div>
+
+                            <div>
+                                <WeatherData2 id={playground.id} />
+                            </div>
+
                             <div className="col-md-12">
                                 <h3>Book this Playground</h3>
                                 {message && <div className="alert alert-success">{message}</div>}

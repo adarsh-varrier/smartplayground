@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar2 from '../reuse/owner-side';
 import DashHead from '../reuse/header2';
+import Confirmation from './confirmation';
 
 function Ownerplay() {
   const [playgrounds, setPlaygrounds] = useState([]);
@@ -55,13 +56,13 @@ function Ownerplay() {
           </div>
 
           {loading ? (
-        <p className="text-center text-primary">Loading playgrounds...</p>
-      ) : error ? (
-        <p className="text-center text-danger">{error}</p>
-      ) : playgrounds.length === 0 ? (
-        <p className="text-center text-muted">No playgrounds registered yet.</p>
-      ) : (
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <p className="text-center text-primary">Loading playgrounds...</p>
+          ) : error ? (
+            <p className="text-center text-danger">{error}</p>
+          ) : playgrounds.length === 0 ? (
+            <p className="text-center text-muted">No playgrounds registered yet.</p>
+          ) : (
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {playgrounds.map((playground) => (
             <div className="col" key={playground.id}>
               <Link to={`/playground/${playground.id}`} className="text-decoration-none">
@@ -89,8 +90,11 @@ function Ownerplay() {
               </Link>
             </div>
           ))}
-        </div>
-      )}
+          </div>
+          )}
+          <div>
+              <Confirmation/>
+          </div>
         </div>
       </div>
     </div>

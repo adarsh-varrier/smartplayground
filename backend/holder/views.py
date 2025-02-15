@@ -14,6 +14,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from django.utils.dateparse import parse_date, parse_time
 from datetime import datetime, timedelta
+from smartplay.utils.weather import get_weather_data, get_future_weather_data
 
 # API view to register a new Playground
 class PlaygroundRegisterView(APIView):
@@ -236,3 +237,81 @@ class BookingDetailView(APIView):
             })
 
         return Response(serialized_data, status=status.HTTP_200_OK)
+    
+class OwnerBookingDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        print(f"Authenticated Owner ID: {user.id}")  # Debugging
+
+        # Get playgrounds owned by the logged-in owner
+        owned_playgrounds = Playground.objects.filter(owner=user)
+
+        if not owned_playgrounds.exists():
+            return Response({"error": "You do not own any playgrounds"}, status=status.HTTP_403_FORBIDDEN)
+
+        # Get bookings only for playgrounds owned by this user, ordered by recent date and time
+        bookings = Booking.objects.filter(playground__in=owned_playgrounds).select_related('user', 'playground')\
+                                  .order_by('date', 'time_slot')
+
+        if not bookings.exists():
+            return Response({"message": "No bookings found for your playgrounds"}, status=status.HTTP_404_NOT_FOUND)
+
+        # Serialize bookings and include customer details
+        serialized_data = []
+        for booking in bookings:
+            serialized_data.append({
+                "ticket_number": booking.ticket_number,
+                "customer_name": booking.user.username,
+                "customer_email": booking.user.email,
+                "playground": booking.playground.name,
+                "time_slot": booking.time_slot,
+                "date": booking.date,
+                "num_players": booking.num_players,
+                "status": booking.status,
+            })
+
+        return Response(serialized_data, status=status.HTTP_200_OK)
+    
+class UpdateBookingStatusView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request, ticket_number):
+        try:
+            booking = Booking.objects.get(ticket_number=ticket_number, playground__owner=request.user)
+            new_status = request.data.get("status")
+
+            if new_status not in ["Confirmed", "Rejected"]:
+                return Response({"error": "Invalid status update"}, status=status.HTTP_400_BAD_REQUEST)
+
+            booking.status = new_status
+            booking.save()
+
+            return Response({"message": "Booking status updated successfully"}, status=status.HTTP_200_OK)
+
+        except Booking.DoesNotExist:
+            return Response({"error": "Booking not found"}, status=status.HTTP_404_NOT_FOUND)
+
+
+class GetPlaygroundWeather(APIView):
+    permission_classes = [IsAuthenticated] 
+
+    def get(self, request, id):
+        playground = get_object_or_404(Playground, id=id)
+        location = playground.location  # Ensure the location field exists
+        print(f'got the location {location}..')
+
+        if location:
+            weather_data = get_weather_data(location)
+            if weather_data and 'sys' in weather_data and 'country' in weather_data['sys']:
+                future_weather_data = get_future_weather_data(location)
+                return Response({
+                    "current_weather": weather_data,
+                    "next_48_hour_forecast": future_weather_data,
+                    "message": "Weather data fetched successfully"
+                })
+            else:
+                return Response({"error": "Could not fetch weather data."}, status=500)
+        else:
+            return Response({"error": "Location is not set for this playground."}, status=400)

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaCog, FaComments, FaTachometerAlt, FaChild, FaGamepad, FaFootballBall, FaBell } from 'react-icons/fa';
+import { FaComments, FaTachometerAlt, FaChild, FaGamepad, FaFootballBall } from 'react-icons/fa';
 import '../../styles/user-nav.css';
 import LogoutButton from './Logout';
 
@@ -19,28 +19,18 @@ function Sidebar() {
           </Link>
         </li>
         <li className='path'>
-          <Link to="/physicaldetails">
+          <Link to="/childplay">
             <FaChild /> Child play
           </Link>
         </li>
         <li className='path'>
-          <Link to="/settings">
+          <Link to="/Games">
             <FaGamepad /> Games
           </Link>
         </li>
         <li className='path'>
-          <Link to="/settings">
-          <FaBell /> Notification
-          </Link>
-        </li>
-        <li className='path'>
-          <Link to="/settings">
-            <FaCog /> Settings
-          </Link>
-        </li>
-        <li className='path'>
           <Link to="/feedback">
-            <FaComments /> Feedback
+            <FaComments /> FAQ
           </Link>
         </li>
         <li className='path'>

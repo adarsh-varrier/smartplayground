@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";  // Change to useNavigate
 import DashHead from "../reuse/header2";
 import Sidebar2 from "../reuse/owner-side";
+import WeatherData2 from "../reuse/weather2";
 
 function PlaygroundDetail() {
     const { id } = useParams(); // Get the playground ID from the URL
@@ -140,6 +141,7 @@ function PlaygroundDetail() {
             <div className="dashboard-container">
                 <Sidebar2 />
                 <div className="dashboard-content">
+                    {console.log("playg-id",id)}
                     <div className="container mt-4">
                         {loading ? (
                             <p className="text-primary">Loading...</p>
@@ -287,6 +289,10 @@ function PlaygroundDetail() {
                             </div>
                         )}
                     </div>
+                    <div>
+                        {playground ? <WeatherData2 id={playground.id} /> : <p>Loading playground...</p>}
+                    </div>
+
                 </div>
             </div>
         </div>

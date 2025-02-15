@@ -2,11 +2,38 @@ import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom'; 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { FaBell } from 'react-icons/fa';
+import { MapPin } from "lucide-react";
 
 
 function DashHead() {
   const [username, setUsername] = useState('');
   const [user_id, setUserId] = useState('');
+
+  const [userdetails, setUserDetails] = useState(null);
+  useEffect(() => {
+  const token = localStorage.getItem('authToken');
+          if (!token) {
+            console.error("No token found, user is not logged in.");
+            return;
+          }
+      
+          fetch('http://127.0.0.1:8000/api/settings/', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Token ${token}`,
+              'Content-Type': 'application/json',
+          },
+          })
+            .then(response => response.json())
+            .then(data => {
+              setUserDetails(data);
+            })
+            .catch(error => {
+              console.error('Error fetching user data:', error);
+          });
+    }, []);
+
   useEffect(() => {
     // Fetch the logged-in user's details
     const token = localStorage.getItem('authToken');  // Get the token from localStorage
@@ -68,16 +95,29 @@ function DashHead() {
                         </Link>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <Link className="dropdown-item" to="/profile">Profile</Link>
+                            <Link className="dropdown-item" to="/settings">Profile</Link>
                           </li>
+                          {userdetails && userdetails.user_type === 'Customer' ? 
                           <li>
                             <Link className="dropdown-item" to="/ticket">Ticket</Link>
-                          </li>
-                          <li><hr className="dropdown-divider" /></li>
+                          </li> : null }
+                          
                           <li>
                             <Link className="dropdown-item" to="/logout">Logout</Link>
                           </li>
                         </ul>
+                      </li>
+                      <li className="nav-item dropdown"><Link className="nav-link " 
+                          to="#" 
+                          id="navbar" 
+                          role="button"
+                          aria-expanded="false" ><FaBell /></Link>
+                      </li>
+                      <li className="nav-item dropdown"><Link className="nav-link " 
+                          to="#" 
+                          id="navbar" 
+                          role="button"
+                          aria-expanded="false" ><MapPin size={20} color="red" /></Link>
                       </li>
                     </ul>
 
