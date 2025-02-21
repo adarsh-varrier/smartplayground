@@ -6,6 +6,6 @@ class HolderConfig(AppConfig):
     name = 'holder'
     
     def ready(self):
-        from holder.tasks import start_scheduler  # ✅ Import only from tasks.py
-        thread = threading.Thread(target=start_scheduler, daemon=True)  
-        thread.start()  # Run scheduler in a separate thread
+        import holder.signals
+        from holder.scheduler import start_scheduler2
+        start_scheduler2()

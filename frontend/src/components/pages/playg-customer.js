@@ -81,6 +81,11 @@ const CustomerPlayg = () => {
                                               <strong>Location:</strong> {playground.location}
                                             </p>
                                             <p className="card-text">
+                                              <strong>Lat:</strong> {playground.latitude}
+                                            </p>                                            <p className="card-text">
+                                              <strong>Long:</strong> {playground.longitude}
+                                            </p>
+                                            <p className="card-text">
                                               <strong>Type:</strong> {playground.platform_type}
                                             </p>
                                             <p className="card-text fw-bold text-success">

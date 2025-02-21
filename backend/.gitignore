@@ -29,3 +29,8 @@ venv/
 env/
 lenv/
 .vscode/
+**/fitToken/
+**/clientSecret/
+
+
+

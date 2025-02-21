@@ -1,6 +1,15 @@
 from django.urls import path
-from .views import PlaygroundRegisterView, OwnerPlaygroundsView, PlaygroundDetailView, PlaygroundCustomerView,PlaygroundDetailView2, BookPlayground,BookedSlotsView, BookingDetailView, OwnerBookingDetailView, UpdateBookingStatusView, GetPlaygroundWeather
+from .views import (
+    PlaygroundRegisterView, OwnerPlaygroundsView, PlaygroundDetailView,
+    PlaygroundCustomerView, PlaygroundDetailView2, BookPlayground,
+    BookedSlotsView, BookingDetailView, OwnerBookingDetailView,
+    UpdateBookingStatusView, GetPlaygroundWeather, NotificationListView,
+    DeleteNotifi, Location
+      # Correct import
+)
+from . import views
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
 
 
@@ -16,7 +25,10 @@ urlpatterns = [
     path('api/bookings/', BookingDetailView.as_view(), name='all_bookings'),
     path('api/confirmation/', OwnerBookingDetailView.as_view(), name='booked_user'),
     path('api/update-booking/<str:ticket_number>/', UpdateBookingStatusView.as_view(), name='update_booking'),
-
+    path('api/notifications/', NotificationListView.as_view(), name='notification'),   
+    path("api/notifications/<int:notification_id>/", DeleteNotifi.as_view(), name="delete-notification"), 
+    path('api/locations/', Location.as_view(), name='get_locations'),
+    path('api/google-fit/', views.fetch_google_fit_view, name='fetch_google_fit'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

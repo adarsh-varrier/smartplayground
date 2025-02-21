@@ -108,13 +108,13 @@ function DashHead() {
                         </ul>
                       </li>
                       <li className="nav-item dropdown"><Link className="nav-link " 
-                          to="#" 
+                          to="/notifications" 
                           id="navbar" 
                           role="button"
                           aria-expanded="false" ><FaBell /></Link>
                       </li>
                       <li className="nav-item dropdown"><Link className="nav-link " 
-                          to="#" 
+                          to="/location" 
                           id="navbar" 
                           role="button"
                           aria-expanded="false" ><MapPin size={20} color="red" /></Link>

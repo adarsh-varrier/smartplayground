@@ -15,6 +15,10 @@ from rest_framework.permissions import AllowAny
 from django.utils.dateparse import parse_date, parse_time
 from datetime import datetime, timedelta
 from smartplay.utils.weather import get_weather_data, get_future_weather_data
+from .models import Notification
+from .serializers import NotificationSerializer
+from smartplay.models import CustomUser
+from backend.google_fit_api import fetch_all_google_fit_data
 
 # API view to register a new Playground
 class PlaygroundRegisterView(APIView):
@@ -315,3 +319,60 @@ class GetPlaygroundWeather(APIView):
                 return Response({"error": "Could not fetch weather data."}, status=500)
         else:
             return Response({"error": "Location is not set for this playground."}, status=400)
+        
+class NotificationListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        notifications = Notification.objects.filter(user=request.user, is_read=False).order_by('-created_at')
+        serializer = NotificationSerializer(notifications, many=True)
+        return Response(serializer.data)
+    
+class DeleteNotifi(APIView):  # Ensure correct name here
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, notification_id):
+        try:
+            notification = Notification.objects.get(id=notification_id, user=request.user)
+            notification.delete()
+            return JsonResponse({"message": "Notification deleted successfully"}, status=200)
+        except Notification.DoesNotExist:
+            return JsonResponse({"error": "Notification not found"}, status=404)
+
+class Location(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+
+        user = request.user  
+        user_data = []
+
+        if user.location:
+            user_data.append({
+                "username": user.username,
+                "location": user.location
+            })
+
+        # Get all playground locations
+        playgrounds = Playground.objects.all().values("name", "latitude", "longitude", "location")
+
+        return JsonResponse({"users": user_data, "playgrounds": list(playgrounds)})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])  # Ensure the user is authenticated    
+def fetch_google_fit_view(request):
+
+    user_id = request.user.id  # Get user ID from the authenticated request
+    print(user_id)
+    if not user_id:
+        return JsonResponse({"status": "error", "message": "User not authenticated"}, status=401)
+
+    try:
+        # Fetch all Google Fit data for user
+        fit_data = fetch_all_google_fit_data(user_id)
+        print("data:",fit_data)
+
+        return JsonResponse({"status": "success", "data": fit_data}, status=200)
+
+    except Exception as e:
+        return JsonResponse({"status": "error", "message": str(e)}, status=500)

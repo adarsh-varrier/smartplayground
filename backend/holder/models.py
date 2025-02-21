@@ -3,11 +3,15 @@ import random
 import string
 from django.db import models
 from smartplay.models import CustomUser
+from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut
 
 # Create your models here.
 class Playground(models.Model):
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
+    latitude = models.FloatField(null=True, blank=True)  # Store Latitude
+    longitude = models.FloatField(null=True, blank=True)  # Store Longitude
     address = models.TextField()
     time_slot_start = models.TimeField()
     time_slot_end = models.TimeField()
@@ -26,6 +30,18 @@ class Playground(models.Model):
     
     # Add ForeignKey to connect Playground with Owner (CustomUser)
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='playgrounds')
+
+    def save(self, *args, **kwargs):
+        if self.location and (not self.latitude or not self.longitude):
+            geolocator = Nominatim(user_agent="geoapi")
+            try:
+                location = geolocator.geocode(self.location, timeout=10)
+                if location:
+                    self.latitude = location.latitude
+                    self.longitude = location.longitude
+            except GeocoderTimedOut:
+                pass  # Prevent API timeout crashes
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -64,3 +80,15 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"Booking {self.ticket_number} - {self.user.username} at {self.playground.name}"
+    
+
+class Notification(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="notifications")
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Notification for {self.user.username}: {self.message}"
+    
+

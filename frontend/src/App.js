@@ -24,6 +24,8 @@ import Childplay from './components/pages/childplay';
 import Childplay2 from './components/pages/child-owner';
 import Games from './components/pages/Games';
 import FAQ from './components/pages/FAQ';
+import Notifications from './components/pages/notifications';
+import HereMap from './components/pages/map';
 
 
 
@@ -52,6 +54,8 @@ function App() {
           <Route path="/childplay-owner" element={<Childplay2 />} />
           <Route path="/Games" element={<Games />} />
           <Route path="/FAQ" element={<FAQ />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/location" element={<HereMap />} />
         </Route>
       </Routes>
     </Router>

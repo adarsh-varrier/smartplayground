@@ -20,7 +20,7 @@ function Sidebar() {
         </li>
         <li className='path'>
           <Link to="/childplay">
-            <FaChild /> Child play
+            <FaChild /> Together
           </Link>
         </li>
         <li className='path'>
@@ -29,7 +29,7 @@ function Sidebar() {
           </Link>
         </li>
         <li className='path'>
-          <Link to="/feedback">
+          <Link to="/FAQ">
             <FaComments /> FAQ
           </Link>
         </li>
