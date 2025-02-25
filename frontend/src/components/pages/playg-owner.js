@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar2 from '../reuse/owner-side';
 import DashHead from '../reuse/header2';
-import Confirmation from './confirmation';
 
 function Ownerplay() {
   const [playgrounds, setPlaygrounds] = useState([]);
@@ -51,8 +50,10 @@ function Ownerplay() {
         <Sidebar2 />
         <div className="dashboard-content">
           <h1>Playgrounds - Owner</h1>
-          <div>
-            <Link to="/play-registration" className="btn">Add Playground</Link>
+          <div className="text-start my-3">
+              <Link to="/play-registration" className="btn btn-success btn-lg shadow-sm">
+                  <i className="fas fa-plus-circle me-2"></i> Add Playground
+              </Link>
           </div>
 
           {loading ? (
@@ -92,9 +93,6 @@ function Ownerplay() {
           ))}
           </div>
           )}
-          <div>
-              <Confirmation/>
-          </div>
         </div>
       </div>
     </div>

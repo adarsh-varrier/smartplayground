@@ -1,9 +1,10 @@
 // OwnerDashboard.js
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
 import Sidebar3 from './reuse/admin-side';
 import '../styles/user-dash.css';  
 import '../styles/head-common.css'; 
+import DashHead from './reuse/header2';
+import RatingGraph from './reuse/ratingview';
 
 function AdminDashboard() {
   const [username, setUsername] = useState('');
@@ -42,25 +43,8 @@ function AdminDashboard() {
       }, []);
   return (
     <div>
-<div className='head-customer'>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div className="container-fluid">
-                <Link className="navbar-brand" to="/">SMARTPLAY</Link>  {/* Use Link for navigation */}
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav ms-auto">
-                    <li className="nav-item">
-                        <Link className="nav-link active" to="">{username ? username : 'Loading...'}</Link>  {/* Use Link for navigation */}
-                    </li>
-                    <li className="nav-item">
-                    
-                    </li>
-                    </ul>
-                </div>
-                </div>
-            </nav>
+    <div className='head-customer'>
+      <DashHead/>
       </div>
       <div className='dashboard-container'>
         <Sidebar3/>
@@ -68,6 +52,10 @@ function AdminDashboard() {
           <h1>Aauthorized Personnel only!!</h1>
             <p>Welcome, {username ? username : 'Loading...'}!</p> {/* Display the username */}
             {/* Owner-specific content */}
+            <div>
+              <RatingGraph/>
+            </div>
+
           </div>
         </div>
     </div>

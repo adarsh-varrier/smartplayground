@@ -4,8 +4,9 @@ import '../../styles/head-common.css';
 
 import DashHead from '../reuse/header2';
 import Sidebar2 from '../reuse/owner-side';
+import Confirmation from './confirmation';
 
-function Childplay2() {
+function BookingView() {
    return (
     <div>
         <div className='head-customer'>
@@ -14,11 +15,14 @@ function Childplay2() {
         <div className='dashboard-container'>
             <Sidebar2/>
             <div className='dashboard-content'>
-              <h2>Child play Owner set up</h2>
+              <h2>Booking</h2>
+              <div>
+                <Confirmation/>
+              </div>
             </div>
         </div>
     </div>
   );
 }
 
-export default Childplay2;
+export default BookingView;

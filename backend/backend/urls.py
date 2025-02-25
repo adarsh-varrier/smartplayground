@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('smartplay.urls')),
     path('',include('holder.urls')),
+    path('',include('Boss.urls')),
 ]

@@ -20,12 +20,15 @@ import CustomerPlayg from './components/pages/playg-customer';
 import PlaygroundDetail2 from './components/pages/playg-custo-view';
 import Ticket from './components/pages/ticket';
 import Confirmation from './components/pages/confirmation';
-import Childplay from './components/pages/childplay';
-import Childplay2 from './components/pages/child-owner';
+import PhysicalView from './components/pages/Physical-view';
+
 import Games from './components/pages/Games';
 import FAQ from './components/pages/FAQ';
 import Notifications from './components/pages/notifications';
 import HereMap from './components/pages/map';
+import UserManagement from './components/pages/user-manage';
+import PlaygManagement from './components/pages/playgManagement';
+import BookingView from './components/pages/Booking';
 
 
 
@@ -50,12 +53,14 @@ function App() {
           <Route path="/playground-customer/:id" element={<PlaygroundDetail2 />} />
           <Route path="/ticket" element={<Ticket />} />
           <Route path="/confirmation" element={<Confirmation />} />
-          <Route path="/childplay" element={<Childplay />} />
-          <Route path="/childplay-owner" element={<Childplay2 />} />
+          <Route path="/childplay" element={<PhysicalView />} />
+          <Route path="/childplay-owner" element={<BookingView />} />
           <Route path="/Games" element={<Games />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/location" element={<HereMap />} />
+          <Route path="/UserManagement" element={<UserManagement />} />
+          <Route path="/PlaygManagement" element={<PlaygManagement />} />
         </Route>
       </Routes>
     </Router>

@@ -5,6 +5,7 @@ import '../../styles/head-common.css';
 
 import DashHead from '../reuse/header2';
 import Sidebar2 from '../reuse/owner-side';
+import StarRating from "../reuse/rating";
 
 function FAQ() {
 
@@ -41,6 +42,8 @@ function FAQ() {
             {userdetails && userdetails.user_type === 'Customer' ? <Sidebar /> : <Sidebar2 />}
             <div className='dashboard-content'>
               <h2>FAQ</h2>
+              <div><StarRating/></div>
+
             </div>
         </div>
     </div>

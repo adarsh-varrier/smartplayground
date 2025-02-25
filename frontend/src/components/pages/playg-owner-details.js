@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";  // Change to useNavi
 import DashHead from "../reuse/header2";
 import Sidebar2 from "../reuse/owner-side";
 import WeatherData2 from "../reuse/weather2";
+import Sidebar3 from "../reuse/admin-side";
 
 function PlaygroundDetail() {
     const { id } = useParams(); // Get the playground ID from the URL
@@ -134,12 +135,35 @@ function PlaygroundDetail() {
             setError(err.message);
         }
     };
+    const [userdetails, setUserDetails] = useState(null);
+          useEffect(() => {
+                  const token = localStorage.getItem('authToken');
+                  if (!token) {
+                      console.error("No token found, user is not logged in.");
+                      return;
+                  }
+              
+                  fetch('http://127.0.0.1:8000/api/settings/', {
+                      method: 'GET',
+                      headers: {
+                      'Authorization': `Token ${token}`,
+                      'Content-Type': 'application/json',
+                  },
+                  })
+                      .then(response => response.json())
+                      .then(data => {
+                      setUserDetails(data);
+                      })
+                      .catch(error => {
+                      console.error('Error fetching user data:', error);
+                  });
+          }, []);
 
     return (
         <div>
             <DashHead />
             <div className="dashboard-container">
-                <Sidebar2 />
+            {userdetails && userdetails.user_type === 'Owner' ? <Sidebar2 /> : <Sidebar3 />}
                 <div className="dashboard-content">
                     {console.log("playg-id",id)}
                     <div className="container mt-4">
@@ -272,18 +296,16 @@ function PlaygroundDetail() {
                                         <p className="card-text text-success fw-bold">
                                             ₹{playground.price}
                                         </p>
-                                        <button
-                                            className="btn btn-warning"
-                                            onClick={() => setIsEditing(true)}
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            className="btn btn-danger ms-2"
-                                            onClick={handleDelete}
-                                        >
-                                            Delete
-                                        </button>
+                                        {userdetails && userdetails.user_type === "Owner" && (
+                                            <>
+                                                <button className="btn btn-warning" onClick={() => setIsEditing(true)}>
+                                                    Edit
+                                                </button>
+                                                <button className="btn btn-danger ms-2" onClick={handleDelete}>
+                                                    Delete
+                                                </button>
+                                            </>
+                                        )}
                                     </div>
                                 )}
                             </div>

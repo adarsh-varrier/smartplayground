@@ -5,6 +5,7 @@ import '../../styles/user-dash.css';
 import '../../styles/head-common.css'; 
 import DashHead from '../reuse/header2';
 import Sidebar2 from "../reuse/owner-side";
+import Sidebar3 from "../reuse/admin-side";
 
 const HERE_API_KEY = "IsdHteQFPrCBYNhqR3ysAqq7pFPxBoBifUPCb39IrhQ"; // Replace with your actual HERE API Key
 
@@ -174,7 +175,15 @@ const HereMap = () => {
           <DashHead/>
       </div>
       <div className='dashboard-container'>
-      {userdetails && userdetails.user_type === 'Customer' ? <Sidebar /> : <Sidebar2 />}
+          {userdetails ? (
+              userdetails.user_type === 'Customer' ? (
+                  <Sidebar />
+              ) : userdetails.user_type === 'Owner' ? (
+                  <Sidebar2 />
+              ) : (
+                  <Sidebar3 />
+              )
+          ) : null}
           <div className='dashboard-content'>
             <h2>MAP</h2>
             <div style={{ height: "500px", width: "100%" }} ref={mapRef}></div>

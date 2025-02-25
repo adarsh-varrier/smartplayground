@@ -107,12 +107,13 @@ function DashHead() {
                           </li>
                         </ul>
                       </li>
+                      {userdetails && (userdetails.user_type === 'Customer' || userdetails.user_type === 'Owner') ? 
                       <li className="nav-item dropdown"><Link className="nav-link " 
                           to="/notifications" 
                           id="navbar" 
                           role="button"
                           aria-expanded="false" ><FaBell /></Link>
-                      </li>
+                      </li>: null }
                       <li className="nav-item dropdown"><Link className="nav-link " 
                           to="/location" 
                           id="navbar" 

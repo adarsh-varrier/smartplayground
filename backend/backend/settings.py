@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',  # Add this line
     'smartplay',  # Add this for the weather app
     'holder',
+    'Boss',
 ]
 
 MIDDLEWARE = [

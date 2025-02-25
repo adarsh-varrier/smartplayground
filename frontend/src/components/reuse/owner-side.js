@@ -20,7 +20,7 @@ function Sidebar2() {
         </li>
         <li className='path'>
           <Link to="/childplay-owner">
-            <FaChild /> Together
+            <FaChild /> Booking
           </Link>
         </li>
         <li className='path'>
