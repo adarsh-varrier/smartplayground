@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import DashHead from "../reuse/header2";
 import Sidebar from "../reuse/user-side";
 import WeatherData2 from '../reuse/weather2';
+import ReviewComponent from '../reuse/review';
 
 function PlaygroundDetail2() {
     const { id } = useParams();  // Access the playground ID from the URL
@@ -17,6 +18,7 @@ function PlaygroundDetail2() {
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [bookedSlots, setBookedSlots] = useState([]); // Holds the already booked slots
+    const userToken = localStorage.getItem("authToken");
 
     useEffect(() => {
         // Fetch the playground details from the backend using the id
@@ -248,6 +250,9 @@ function PlaygroundDetail2() {
                                 </form>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <ReviewComponent playgroundId={id} userToken={userToken} />
                     </div>
                 </div>
             </div>

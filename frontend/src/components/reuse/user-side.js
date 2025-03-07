@@ -25,7 +25,7 @@ function Sidebar() {
         </li>
         <li className='path'>
           <Link to="/Games">
-            <FaGamepad /> Virtual Play
+            <FaGamepad /> Games
           </Link>
         </li>
         <li className='path'>

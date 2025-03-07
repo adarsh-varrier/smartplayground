@@ -4,6 +4,7 @@ import DashHead from "../reuse/header2";
 import Sidebar2 from "../reuse/owner-side";
 import WeatherData2 from "../reuse/weather2";
 import Sidebar3 from "../reuse/admin-side";
+import ReviewComponent from "../reuse/review";
 
 function PlaygroundDetail() {
     const { id } = useParams(); // Get the playground ID from the URL
@@ -19,7 +20,7 @@ function PlaygroundDetail() {
         price: '',
         image: ''
     });
-
+    const userToken = localStorage.getItem("authToken");
     useEffect(() => {
         const fetchPlaygroundDetail = async () => {
             try {
@@ -313,6 +314,9 @@ function PlaygroundDetail() {
                     </div>
                     <div>
                         {playground ? <WeatherData2 id={playground.id} /> : <p>Loading playground...</p>}
+                    </div>
+                    <div>
+                        <ReviewComponent playgroundId={id} userToken={userToken} />
                     </div>
 
                 </div>

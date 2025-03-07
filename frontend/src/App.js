@@ -29,6 +29,8 @@ import HereMap from './components/pages/map';
 import UserManagement from './components/pages/user-manage';
 import PlaygManagement from './components/pages/playgManagement';
 import BookingView from './components/pages/Booking';
+import XOXO from './components/pages/XOXO';
+import TicTacToe2 from './components/reuse/tic-tac-toe2';
 
 
 
@@ -61,6 +63,8 @@ function App() {
           <Route path="/location" element={<HereMap />} />
           <Route path="/UserManagement" element={<UserManagement />} />
           <Route path="/PlaygManagement" element={<PlaygManagement />} />
+          <Route path="/tic-tac-toe2" element={<TicTacToe2 />} />
+          <Route path="/XOXO" element={<XOXO />} />
         </Route>
       </Routes>
     </Router>

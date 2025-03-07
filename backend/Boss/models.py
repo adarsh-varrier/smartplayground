@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from smartplay.models import CustomUser
+from holder.models import Playground
 
 User = get_user_model()
 
@@ -10,3 +12,14 @@ class AppRating(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.rating}"
+
+
+class Review(models.Model):
+    playground = models.ForeignKey(Playground, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='reviews')
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])  # Star rating from 1 to 5
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.playground.name} ({self.rating} Stars)"

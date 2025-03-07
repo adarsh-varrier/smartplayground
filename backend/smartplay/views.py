@@ -111,6 +111,7 @@ def get_user_weather(request):
 
     if location:
         weather_data = get_weather_data(location)
+        print("weather:-", weather_data)
         if weather_data and 'sys' in weather_data and 'country' in weather_data['sys']:
             future_weather_data = get_future_weather_data(location)
             return Response({

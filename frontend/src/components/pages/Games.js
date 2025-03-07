@@ -5,6 +5,7 @@ import '../../styles/head-common.css';
  
 
 import DashHead from '../reuse/header2';
+import { Link } from 'react-router-dom';
 
 function Games() {
    return (
@@ -15,9 +16,14 @@ function Games() {
         <div className='dashboard-container'>
             <Sidebar/>
             <div className='dashboard-content'>
-              <h2>Lets Play</h2>
-              
-
+            <div className='game-content text-center p-4 bg-light rounded shadow'>
+              <h2 className='mb-4 display-4 text-primary'>Let's Play</h2>
+              <ul className='list-unstyled'>
+                <li className='mb-3'>
+                  <Link className='btn btn-outline-primary btn-lg w-50' to="/XOXO"> XOXO</Link>
+                </li>
+              </ul>
+            </div>
             </div>
         </div>
     </div>

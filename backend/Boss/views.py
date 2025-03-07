@@ -11,6 +11,11 @@ from rest_framework.permissions import IsAuthenticated
 from .models import AppRating
 from django.db.models import Avg
 
+from rest_framework import generics, permissions
+from rest_framework.response import Response
+from .models import Review, Playground
+from .serializers import ReviewSerializer
+
 # Admin Dashboard API View
 class AdminDashboardView(APIView):
     permission_classes = [IsAdminUser]  # Only admin users can access
@@ -128,3 +133,30 @@ class AverageRatingView(APIView):
     def get(self, request):
         avg_rating = AppRating.objects.aggregate(Avg('rating'))['rating__avg'] or 0
         return Response({"average_rating": round(avg_rating, 2)})
+    
+
+class ReviewListCreateView(generics.ListCreateAPIView):
+    """
+    Allows users to see all reviews for a specific playground and add a new review.
+    """
+    serializer_class = ReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        playground_id = self.kwargs['playground_id']
+        return Review.objects.filter(playground_id=playground_id)
+
+    def perform_create(self, serializer):
+        playground = get_object_or_404(Playground, id=self.kwargs['playground_id'])
+        serializer.save(user=self.request.user, playground=playground)
+
+
+class ReviewDeleteView(generics.DestroyAPIView):
+    """
+    Allows owners to delete reviews from their playgrounds.
+    """
+    serializer_class = ReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Review.objects.filter(playground__owner=self.request.user)

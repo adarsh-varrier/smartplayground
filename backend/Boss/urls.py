@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AdminDashboardView, DeleteAdminView, CreateAdminView, PlaygroundAdminView, SubmitRatingView, AverageRatingView
+from .views import AdminDashboardView, DeleteAdminView, CreateAdminView, PlaygroundAdminView, SubmitRatingView, AverageRatingView, ReviewListCreateView, ReviewDeleteView
 
 urlpatterns = [
     path('api/users/', AdminDashboardView.as_view(), name='admin_dashboard'),  # GET for users
@@ -10,4 +10,6 @@ urlpatterns = [
     path('api/playgrounds/<int:id>/', PlaygroundAdminView.as_view(), name='playground-delete'),
     path("api/submit-rating/", SubmitRatingView.as_view(), name="submit_rating"),
     path("api/average-rating/", AverageRatingView.as_view(), name="average_rating"),
+    path('api/playgroundReview/<int:playground_id>/reviews/', ReviewListCreateView.as_view(), name='review-list-create'),
+    path('api/playgroundReview/reviews/<int:pk>/delete/', ReviewDeleteView.as_view(), name='delete-review'),
 ]
