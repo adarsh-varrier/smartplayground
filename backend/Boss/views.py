@@ -15,6 +15,11 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from .models import Review, Playground
 from .serializers import ReviewSerializer
+from .models import FAQ
+from .serializers import FAQSerializer
+
+from django.db.models import Q
+import spacy
 
 # Admin Dashboard API View
 class AdminDashboardView(APIView):
@@ -160,3 +165,75 @@ class ReviewDeleteView(generics.DestroyAPIView):
 
     def get_queryset(self):
         return Review.objects.filter(playground__owner=self.request.user)
+    
+class FAQListCreateView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        query = request.GET.get('query', '')
+        faqs = FAQ.objects.filter(question__icontains=query) if query else FAQ.objects.all()
+        serializer = FAQSerializer(faqs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        serializer = FAQSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class FAQUpdateDeleteView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def put(self, request, id):
+        try:
+            faq = FAQ.objects.get(id=id)
+        except FAQ.DoesNotExist:
+            return Response({"error": "FAQ not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = FAQSerializer(faq, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id):
+        try:
+            faq = FAQ.objects.get(id=id)
+        except FAQ.DoesNotExist:
+            return Response({"error": "FAQ not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        faq.delete()
+        return Response({"message": "FAQ deleted"}, status=status.HTTP_204_NO_CONTENT)
+    
+
+
+nlp = spacy.load("en_core_web_md")  # Load NLP model
+
+class FAQSearchView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        query = request.query_params.get("q", "").strip().lower()
+        if not query:
+            return Response({"message": "Query is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        faqs = FAQ.objects.all()
+        best_match = None
+        best_score = 0
+
+        user_query_vector = nlp(query).vector  # Convert query into vector
+
+        for faq in faqs:
+            faq_vector = nlp(faq.question).vector  # Convert stored FAQ question into vector
+            similarity = user_query_vector @ faq_vector  # Cosine similarity
+
+            if similarity > best_score:
+                best_score = similarity
+                best_match = faq
+
+        if best_match and best_score > 0.7:  # Set a similarity threshold
+            serializer = FAQSerializer(best_match)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response({"message": "No matching FAQ found"}, status=status.HTTP_404_NOT_FOUND)

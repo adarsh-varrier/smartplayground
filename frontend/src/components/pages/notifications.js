@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Sidebar from '../reuse/user-side';
 import '../../styles/user-dash.css';  
@@ -11,20 +11,45 @@ function Notifications() {
     const [notifications, setNotifications] = useState([]);
     const token = localStorage.getItem("authToken");
 
+    
+    // Function to mark notifications as read
+    const markNotificationsAsRead = useCallback(async () => {
+        try {
+            await axios.patch("http://127.0.0.1:8000/api/notifications/mark-read/", {}, {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            });
+
+            // ✅ Update the state to mark notifications as read
+            setNotifications((prevNotifications) =>
+                prevNotifications.map((notif) => ({ ...notif, is_read: true }))
+            );
+
+            console.log("Notifications marked as read");
+        } catch (error) {
+            console.error("Error marking notifications as read:", error);
+        }
+    }, [token]);  // ✅ Added dependency to ensure it's stable
+
     useEffect(() => {
         if (!token) {
             console.error("No token found, user is not logged in.");
             return;
         }
     
-        axios.get("http://127.0.0.1:8000/api/notifications/", {  // ✅ Missing comma fixed
+        axios.get("http://127.0.0.1:8000/api/notifications/", {
             headers: {
                 Authorization: `Token ${token}`
             }
-        }) 
-        .then(response => setNotifications(response.data))
+        })
+        .then(response => {
+            console.log("Notifications fetched:", response.data);  // Debugging
+            setNotifications(response.data);
+            markNotificationsAsRead();
+        })
         .catch(error => console.error("Error fetching notifications:", error));
-    }, [token]);
+    }, [token, markNotificationsAsRead]);
 
     const [userdetails, setUserDetails] = useState(null);
     useEffect(() => {
@@ -74,7 +99,7 @@ function Notifications() {
             console.error("Error deleting notification:", error);
         }
     };
-    
+
 
   return (
     <div>
@@ -84,16 +109,30 @@ function Notifications() {
         <div className='dashboard-container'>
         {userdetails && userdetails.user_type === 'Customer' ? <Sidebar /> : <Sidebar2 />}
             <div className='dashboard-content'>
-            <h3>Notifications</h3>
-            <ul>
-                {notifications.map((notif, index) => (
-                <li key={index}>
-                    {notif.message} <small>({new Date(notif.created_at).toLocaleString()})</small>
-                    {console.log("notifcation id:",notif.id)}
-                    <button onClick={() => deleteNotification(notif.id)}>Delete</button>
-                </li>
-                ))}
-            </ul>
+                <div className="container mt-4">
+                    <h3 className="text-primary fw-bold mb-3">Notifications</h3>
+
+                    {notifications.length === 0 ? (
+                        <div className="alert alert-info text-center">No new notifications</div>
+                    ) : (
+                        <ul className="list-group">
+                            {notifications.map((notif, index) => (
+                                <li key={index} className={`list-group-item d-flex justify-content-between align-items-center ${notif.is_read ? 'text-muted' : 'fw-bold'}`}>
+                                    <div>
+                                        <p className="mb-1">{notif.message} {notif.is_read && "✔"}</p>
+                                        <small className="text-muted">{new Date(notif.created_at).toLocaleString()}</small>
+                                    </div>
+                                    <button
+                                        className="btn btn-danger btn-sm"
+                                        onClick={() => deleteNotification(notif.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
         </div>
     </div>

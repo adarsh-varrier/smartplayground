@@ -31,6 +31,12 @@ import PlaygManagement from './components/pages/playgManagement';
 import BookingView from './components/pages/Booking';
 import XOXO from './components/pages/XOXO';
 import TicTacToe2 from './components/reuse/tic-tac-toe2';
+import Wordle from './components/pages/Wordle';
+import WordlePlay from './components/pages/Wordle-play';
+import Ninja from './components/pages/ninja';
+import NinjaPlay from './components/pages/ninjaplay';
+import FAQAdmin from './components/pages/FaqAdmin';
+import Playgbooking from './components/pages/playgbooking';
 
 
 
@@ -53,18 +59,24 @@ function App() {
           <Route path="/playground/:id" element={<PlaygroundDetail />} />
           <Route path="/playglist" element={<CustomerPlayg />} />
           <Route path="/playground-customer/:id" element={<PlaygroundDetail2 />} />
+          <Route path="/playground-customer-booking/:id" element={<Playgbooking />} />
           <Route path="/ticket" element={<Ticket />} />
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/childplay" element={<PhysicalView />} />
           <Route path="/childplay-owner" element={<BookingView />} />
           <Route path="/Games" element={<Games />} />
           <Route path="/FAQ" element={<FAQ />} />
+          <Route path="/FAQadmin" element={<FAQAdmin />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/location" element={<HereMap />} />
           <Route path="/UserManagement" element={<UserManagement />} />
           <Route path="/PlaygManagement" element={<PlaygManagement />} />
           <Route path="/tic-tac-toe2" element={<TicTacToe2 />} />
           <Route path="/XOXO" element={<XOXO />} />
+          <Route path="/wordle" element={<Wordle />} />
+          <Route path="/wordleplay" element={<WordlePlay />} />
+          <Route path="/Ninja" element={<Ninja />} />
+          <Route path="/Ninjaplay" element={<NinjaPlay />} />
         </Route>
       </Routes>
     </Router>

@@ -22,6 +22,12 @@ function Games() {
                 <li className='mb-3'>
                   <Link className='btn btn-outline-primary btn-lg w-50' to="/XOXO"> XOXO</Link>
                 </li>
+                <li className='mb-3'>
+                  <Link className='btn btn-outline-primary btn-lg w-50' to="/wordle"> Wordle</Link>
+                </li>
+                <li className='mb-3'>
+                  <Link className='btn btn-outline-primary btn-lg w-50' to="/Ninja"> Ninja</Link>
+                </li>
               </ul>
             </div>
             </div>

@@ -19,7 +19,7 @@ from .models import Notification
 from .serializers import NotificationSerializer
 from smartplay.models import CustomUser
 from backend.google_fit_api import fetch_all_google_fit_data
-
+from django.utils import timezone
 # API view to register a new Playground
 class PlaygroundRegisterView(APIView):
     permission_classes = [IsAuthenticated]
@@ -147,6 +147,17 @@ class PlaygroundDetailView2(APIView):
             return Response({"detail": "Playground not found."}, status=status.HTTP_404_NOT_FOUND)
         
 
+
+def delete_expired_bookings():
+    """
+    Delete bookings with a date older than the current date.
+    """
+    current_date = timezone.now().date()
+    expired_bookings = Booking.objects.filter(date__lt=current_date)
+    count = expired_bookings.count()
+    expired_bookings.delete()
+    print(f"Deleted {count} expired bookings.")
+
 class BookPlayground(APIView):
     permission_classes = [IsAuthenticated]  # Requires authentication
 
@@ -154,6 +165,10 @@ class BookPlayground(APIView):
         """
         Create a booking for a specific playground.
         """
+
+        # Clean up expired bookings before processing the new booking
+        delete_expired_bookings()
+
         user = request.user
         playground = get_object_or_404(Playground, id=playground_id)
 
@@ -324,9 +339,24 @@ class NotificationListView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        notifications = Notification.objects.filter(user=request.user, is_read=False).order_by('-created_at')
+        notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
         serializer = NotificationSerializer(notifications, many=True)
         return Response(serializer.data)
+    
+class MarkNotificationsReadView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request):
+        Notification.objects.filter(user=request.user, is_read=False).update(is_read=True)
+        return Response({"message": "All notifications marked as read"}, status=200)
+    
+class UnreadNotificationCountView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        unread_count = Notification.objects.filter(user=request.user, is_read=False).count()
+        return Response({"unread_count": unread_count})
+    
     
 class DeleteNotifi(APIView):  # Ensure correct name here
     permission_classes = [IsAuthenticated]

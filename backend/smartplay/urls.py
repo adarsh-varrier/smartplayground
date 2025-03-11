@@ -7,7 +7,7 @@ from django.contrib.auth.views import LoginView
 from .views import LogoutView, UserDetailsView,user_settings
 
 urlpatterns = [
-    path('api/test/', test_view, name='test_view'),
+    path('', test_view, name='test_view'),
     path('register/', RegisterView.as_view(), name='register'),
     path('api/login/', views.LoginView.as_view(), name='login'),
     path('api/logout/', LogoutView.as_view(), name='logout'),

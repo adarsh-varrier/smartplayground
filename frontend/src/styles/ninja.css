@@ -1,0 +1,18 @@
+.ninjaplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  canvas {
+    background-color: lightgray;
+    border-radius: 8px;
+  }
+  
+  h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+  }
+  

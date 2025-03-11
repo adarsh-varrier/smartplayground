@@ -98,113 +98,126 @@ function PlaygroundRegister() {
       <div className="dashboard-container">
         <Sidebar2 />
         <div className="dashboard-content">
-          <div>
-            <h1>Playground Registration</h1>
-            {responseMessage && <p>{responseMessage}</p>}
+          <div className="container mt-5">
+              <div className="card p-4 shadow">
+                <h1 className="text-center mb-4">Playground Registration</h1>
+                {responseMessage && <p className="alert alert-info">{responseMessage}</p>}
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                  <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Playground Name:</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      className="form-control"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="location" className="form-label">Location:</label>
+                    <input
+                      type="text"
+                      id="location"
+                      name="location"
+                      className="form-control"
+                      value={formData.location}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="address" className="form-label">Address:</label>
+                    <textarea
+                      id="address"
+                      name="address"
+                      className="form-control"
+                      value={formData.address}
+                      onChange={handleChange}
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6 mb-3">
+                      <label htmlFor="time_slot_start" className="form-label">Time Slot Start:</label>
+                      <input
+                        type="time"
+                        id="time_slot_start"
+                        name="time_slot_start"
+                        className="form-control"
+                        value={formData.time_slot_start}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="col-md-6 mb-3">
+                      <label htmlFor="time_slot_end" className="form-label">Time Slot End:</label>
+                      <input
+                        type="time"
+                        id="time_slot_end"
+                        name="time_slot_end"
+                        className="form-control"
+                        value={formData.time_slot_end}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="num_players" className="form-label">Number of Players:</label>
+                    <input
+                      type="number"
+                      id="num_players"
+                      name="num_players"
+                      className="form-control"
+                      value={formData.num_players}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="platform_type" className="form-label">Platform Type:</label>
+                    <select
+                      id="platform_type"
+                      name="platform_type"
+                      className="form-select"
+                      value={formData.platform_type}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="football">Football Ground</option>
+                      <option value="cricket">Cricket Ground</option>
+                      <option value="park">Children’s Park</option>
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="image" className="form-label">Image:</label>
+                    <input
+                      type="file"
+                      id="image"
+                      name="image"
+                      className="form-control"
+                      onChange={handleFileChange}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="price" className="form-label">Price per Hour:</label>
+                    <input
+                      type="number"
+                      id="price"
+                      name="price"
+                      className="form-control"
+                      value={formData.price}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary w-100">Register Playground</button>
+                </form>
+              </div>
+            </div>
           </div>
-          <form onSubmit={handleSubmit} encType="multipart/form-data">
-            <div>
-              <label htmlFor="name">Playground Name:</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="location">Location:</label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="address">Address:</label>
-              <textarea
-                id="address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
-            <div>
-              <label htmlFor="time_slot_start">Time Slot Start:</label>
-              <input
-                type="time"
-                id="time_slot_start"
-                name="time_slot_start"
-                value={formData.time_slot_start}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="time_slot_end">Time Slot End:</label>
-              <input
-                type="time"
-                id="time_slot_end"
-                name="time_slot_end"
-                value={formData.time_slot_end}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="num_players">Number of Players:</label>
-              <input
-                type="number"
-                id="num_players"
-                name="num_players"
-                value={formData.num_players}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="platform_type">Platform Type:</label>
-              <select
-                id="platform_type"
-                name="platform_type"
-                value={formData.platform_type}
-                onChange={handleChange}
-                required
-              >
-                <option value="football">Football Ground</option>
-                <option value="cricket">Cricket Ground</option>
-                <option value="park">Children’s Park</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="image">Image:</label>
-              <input
-                type="file"
-                id="image"
-                name="image"
-                onChange={handleFileChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="price">Price per Hour:</label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <button type="submit">Register Playground</button>
-          </form>
-        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaTachometerAlt, FaChild, FaFootballBall } from 'react-icons/fa';
+import { FaTachometerAlt, FaChild, FaFootballBall, FaComments } from 'react-icons/fa';
 import '../../styles/user-nav.css';
 import LogoutButton from './Logout';
 
@@ -15,12 +15,17 @@ function Sidebar3() {
         </li>
         <li className='path'>
           <Link to="/UserManagement">
-          <FaFootballBall /> User Management
+          <FaFootballBall /> Users
           </Link>
         </li>
         <li className='path'>
           <Link to="/PlaygManagement">
-            <FaChild /> Playground Management
+            <FaChild /> Playground 
+          </Link>
+        </li>
+        <li className='path'>
+          <Link to="/FAQadmin">
+            <FaComments /> FAQ
           </Link>
         </li>
         <li className='path'>

@@ -4,7 +4,7 @@ from .views import (
     PlaygroundCustomerView, PlaygroundDetailView2, BookPlayground,
     BookedSlotsView, BookingDetailView, OwnerBookingDetailView,
     UpdateBookingStatusView, GetPlaygroundWeather, NotificationListView,
-    DeleteNotifi, Location
+    DeleteNotifi, Location, MarkNotificationsReadView, UnreadNotificationCountView
       # Correct import
 )
 from . import views
@@ -26,7 +26,9 @@ urlpatterns = [
     path('api/confirmation/', OwnerBookingDetailView.as_view(), name='booked_user'),
     path('api/update-booking/<str:ticket_number>/', UpdateBookingStatusView.as_view(), name='update_booking'),
     path('api/notifications/', NotificationListView.as_view(), name='notification'),   
-    path("api/notifications/<int:notification_id>/", DeleteNotifi.as_view(), name="delete-notification"), 
+    path("api/notifications/<int:notification_id>/", DeleteNotifi.as_view(), name="delete-notification"),
+    path('api/notifications/mark-read/', MarkNotificationsReadView.as_view(), name='mark-notifications-read'), 
+    path('api/notifications/unread-count/', UnreadNotificationCountView.as_view(), name='unread-count'),
     path('api/locations/', Location.as_view(), name='get_locations'),
     path('api/google-fit/', views.fetch_google_fit_view, name='fetch_google_fit'),
 ]

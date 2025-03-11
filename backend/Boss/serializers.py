@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from holder.models import Playground
 from smartplay.models import CustomUser
-from .models import AppRating, Review
+from .models import AppRating, Review, FAQ
 
 class PlaygroundSerializer(serializers.ModelSerializer):
     owner_name = serializers.SerializerMethodField()  # Fetch owner's name manually
@@ -27,3 +27,10 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ['id', 'playground', 'user', 'rating', 'comment', 'created_at']
+
+
+
+class FAQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FAQ
+        fields = '__all__'

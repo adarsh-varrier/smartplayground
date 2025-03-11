@@ -10,7 +10,7 @@ const Home = () => {
 
     // Fetch data from Django backend (Test connection)
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/test/', { // API endpoint for testing
+        fetch('http://127.0.0.1:8000//', { // API endpoint for testing
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
