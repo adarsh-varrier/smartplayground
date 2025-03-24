@@ -1,43 +1,49 @@
 // src/Home.js
-import React, { useEffect, useState } from 'react';
+import React, { useRef, } from 'react';
 import Header from "./reuse/Header";
 import Footer from "./reuse/Footer";
-import myImage from '../assets/home1.jpg';  // Adjust the path as needed
+import myImage1 from '../assets/woman.jpg';  
+import myImage2 from '../assets/shoe.jpg';
+import myVideo from '../assets/main.mp4';
+import Chatbot from './chatbot';
 
+import '../styles/home.css';
 
 const Home = () => {
-    const [message, setMessage] = useState('');
-
-    // Fetch data from Django backend (Test connection)
-    useEffect(() => {
-        fetch('http://127.0.0.1:8000//', { // API endpoint for testing
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            setMessage(data.message); // Set message from backend
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            setMessage('Failed to connect to the backend.');
-        });
-    }, []);
+    const videoRef = useRef(null);
+    
 
     return (
         <div>
-            <Header />
-            <div className="position-relative text-center">
-                {/* Image */}
-                <img src={myImage} className="w-100 h-100" alt="main-image" />
+            <Header className="bg-transparent absolute top-0 w-full z-50" />
+            <div className="relative text-center">
+                <div className="video-container">
+                    {/* Video Background */}
+                    <div className="video-background">
+                        <video 
+                            ref={videoRef}
+                            src={myVideo} 
+                            autoPlay 
+                            muted 
+                            loop 
+                            playsInline 
+                        />
+                    </div>
 
-                {/* Overlayed Content */}
-                <div className="position-absolute top-50 start-50 translate-middle text-white">
-                    <h1 className="mt-5">Welcome to the Home Page</h1>
-                    <p className="mt-3">{message}</p>
+                    {/* Overlayed Text */}
+                    <div className="video-overlay">
+                        <p>YOUR  NEAREST SPORTS COMMUNITY</p>
+                    </div>
                 </div>
+
+                {/* Image */}
+                <img src={myImage1} className="w-100 h-100" alt="main-image" />
+                <div style={{ backgroundColor: '#231056', width: '99vw', height: '100vh' }} className="flex justify-center items-center">
+                    <p className="text-white text-2xl font-bold"></p>
+                </div>
+                <img src={myImage2} className="w-100 h-100" alt="main-image" />
+
+                <Chatbot/>
             </div>
             <Footer />
         </div>

@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+/* Force the chatbot to always be on top */
+.chatbot-button, .chatbot-window {
+  position: fixed !important;
+  z-index: 999999 !important;
+}
+

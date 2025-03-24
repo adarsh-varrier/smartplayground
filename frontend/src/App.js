@@ -37,6 +37,8 @@ import Ninja from './components/pages/ninja';
 import NinjaPlay from './components/pages/ninjaplay';
 import FAQAdmin from './components/pages/FaqAdmin';
 import Playgbooking from './components/pages/playgbooking';
+import Forgot from './components/forgotpass';
+import ResetPassword from './components/ResetPass';
 
 
 
@@ -49,6 +51,8 @@ function App() {
         <Route path="/about" element={<About />} />   {/* Login page route */}
         <Route path="/contact" element={<Contact />} />   {/* Login page route */}
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/reset-password/:uidb64/:token" element={<ResetPassword />} />
         <Route element={<PrivateRoute />}>
           <Route path="/customer-dashboard" element={<CustomerDashboard />} />
           <Route path="/owner-dashboard" element={<OwnerDashboard />} />

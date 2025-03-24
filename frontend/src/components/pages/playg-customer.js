@@ -65,9 +65,11 @@ const CustomerPlayg = () => {
                                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                                   {playgrounds.map((playground) => (
                                     <div className="col" key={playground.id}>
-                                      <Link to={`/playground-customer/${playground.id}`} className="text-decoration-none">
+                                      <Link to={`/playground-customer/${playground.id}`} className="text-decoration-none"
+                                      style={{ backgroundColor: "#ff9800", borderRadius: "10px", padding: "10px", display: "block" }}
+                                      >
                                       
-                                        <div className="card h-100 shadow-sm">
+                                        <div className="card h-100 custom-card">
                                           <img
                                             src={`http://127.0.0.1:8000${playground.image}`}
                                             className="card-img-top"

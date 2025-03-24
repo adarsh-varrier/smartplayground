@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaComments, FaTachometerAlt, FaChild, FaFootballBall } from 'react-icons/fa';
+import { FaComments, FaTachometerAlt, FaCalendarAlt, FaFootballBall } from 'react-icons/fa';
 import '../../styles/user-nav.css';
 import LogoutButton from './Logout';
 
@@ -20,7 +20,7 @@ function Sidebar2() {
         </li>
         <li className='path'>
           <Link to="/childplay-owner">
-            <FaChild /> Booking
+            <FaCalendarAlt /> Booking
           </Link>
         </li>
         <li className='path'>

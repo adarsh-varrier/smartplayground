@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaComments, FaTachometerAlt, FaChild, FaGamepad, FaFootballBall } from 'react-icons/fa';
 import '../../styles/user-nav.css';
 import LogoutButton from './Logout';
+import Chatbot from '../chatbot';
 
 function Sidebar() {
   return (
@@ -38,6 +39,7 @@ function Sidebar() {
             <LogoutButton/> 
           </Link>
         </li>
+        <Chatbot/>
       </ul>
     </div>
   );
