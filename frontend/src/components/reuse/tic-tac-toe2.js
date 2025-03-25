@@ -4,6 +4,7 @@ import '../../styles/user-dash.css';
 import '../../styles/head-common.css'; 
 import '../../styles/tic-tac-toe.css'; 
 import DashHead from '../reuse/header2';
+import { Link } from 'react-router-dom';
 
 function TicTacToe2() {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -94,6 +95,11 @@ function TicTacToe2() {
           <button className="mode-toggle-button" onClick={toggleGameMode}>
             {isHumanVsCpu ? 'Switch to Human vs Human' : 'Switch to Human vs CPU'}
           </button>
+          <div className="d-flex justify-content-end mb-3">
+                <Link to={`/XOXO`} className="btn btn-outline-primary">
+                    Quit
+                </Link>
+            </div>
         </div>
         </div>
       </div>

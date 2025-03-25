@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";  // Change to useNavigate
+import { useParams, useNavigate, Link } from "react-router-dom";  // Change to useNavigate
 import DashHead from "../reuse/header2";
 import Sidebar2 from "../reuse/owner-side";
 import WeatherData2 from "../reuse/weather2";
@@ -167,6 +167,20 @@ function PlaygroundDetail() {
             {userdetails && userdetails.user_type === 'Owner' ? <Sidebar2 /> : <Sidebar3 />}
                 <div className="dashboard-content">
                     {console.log("playg-id",id)}
+                    {userdetails && userdetails.user_type === "Owner" && (
+                    <div className="d-flex justify-content-end mb-3">
+                            <Link to={`/ownerplay`} className="btn btn-outline-primary">
+                                Back
+                            </Link>
+                    </div>
+                    )}
+                    {userdetails && userdetails.user_type !== "Owner" && (
+                    <div className="d-flex justify-content-end mb-3">
+                            <Link to={`/PlaygManagement`} className="btn btn-outline-primary">
+                                Back
+                            </Link>
+                    </div>
+                    )}
                     <div className="container mt-4">
                         {loading ? (
                             <p className="text-primary">Loading...</p>
@@ -318,7 +332,6 @@ function PlaygroundDetail() {
                     <div>
                         <ReviewComponent playgroundId={id} userToken={userToken} />
                     </div>
-
                 </div>
             </div>
         </div>

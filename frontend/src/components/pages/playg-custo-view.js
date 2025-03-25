@@ -52,6 +52,11 @@ function PlaygroundDetail2() {
                     <Sidebar />
                     <div className="dashboard-content">
                         <p className="text-center display-4">Playground Details</p>
+                            <div className="d-flex justify-content-end mb-3">
+                                <Link to={`/playglist`} className="btn btn-outline-primary">
+                                    Back
+                                </Link>
+                            </div>
         
                         {/* Show Loading Message */}
                         {loading && <p className="text-center">Loading playground details...</p>}

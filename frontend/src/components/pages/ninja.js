@@ -16,6 +16,11 @@ function Wordle() {
         <div className='dashboard-container'>
             <Sidebar/>
             <div className='dashboard-content text-center p-4 bg-light rounded shadow'>
+                          <div className="d-flex justify-content-end mb-3">
+                            <Link to={`/Games`} className="btn btn-outline-primary">
+                                Back
+                            </Link>
+                          </div>
                 <h2 className='mb-4 display-4 text-primary'>Ninja</h2>
                 <ul className='list-unstyled'>
                     <li className='mb-3'>

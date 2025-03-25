@@ -3,6 +3,7 @@ import Sidebar from '../reuse/user-side';
 import '../../styles/user-dash.css';  
 import '../../styles/head-common.css'; 
 import DashHead from '../reuse/header2';
+import { Link } from 'react-router-dom';
 
 const WORDS = [
     'CRANE', 'PLANT', 'HOUSE', 'TABLE', 'CHAIR', 'BRICK', 'APPLE', 'BREAD', 'CLOUD', 'DREAM',
@@ -125,6 +126,11 @@ function WordlePlay() {
                     </div>
                     )}
                 </div>
+            <div className="d-flex justify-content-end mb-3">
+                <Link to={`/wordle`} className="btn btn-outline-primary">
+                    Quit
+                </Link>
+            </div>
             </div>
 
         </div>

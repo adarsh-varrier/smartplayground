@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../reuse/user-side';
 import '../../styles/user-dash.css';  
-import '../../styles/head-common.css'; 
+import '../../styles/head-common.css';
+import '../../styles/booking.css';
  
 
 import DashHead from '../reuse/header2';
@@ -155,9 +156,6 @@ function Playgbooking() {
         return <div>{error}</div>;  // Show error message if there is an error
     }
 
-    // Disable past dates for the date picker
-    const currentDate = new Date().toISOString().split("T")[0];  // Get today's date
-
     // Disable time slots that are in the past based on the selected date
     const availableTimeSlots = ["10:00-12:00", "14:00-16:00", "17:00-19:00", "20:00-22:00"].filter(slot => {
         const startTime = parseInt(slot.split(":")[0]);
@@ -184,9 +182,15 @@ function Playgbooking() {
             <Sidebar/>
             <div className="dashboard-content">
                     <p className="text-center display-4">Playground Details</p>
+                    <div className="d-flex justify-content-end mb-3">
+                        <Link to={`/playground-customer/${playground.id}`} className="btn btn-outline-primary">
+                            Back
+                        </Link>
+                    </div>
+
                     <div className="container py-5">
                         <div className="row">
-                            <div className="col-md-4">
+                            <div className="col-md-6">
                                 <img
                                     src={`http://127.0.0.1:8000${playground.image}`}
                                     alt={playground.name}
@@ -194,63 +198,113 @@ function Playgbooking() {
                                 />
                             </div>
                             <div className="col-md-8">
+                                <div className='details-book'>
                                 <h1 className="display-5">{playground.name}</h1>
                                 <p><strong>Location:</strong> {playground.location}</p>
                                 <p><strong>Price:</strong> {playground.price}</p>
                                 <p><strong>Available Time Slot:</strong> {playground.time_slot_start} to {playground.time_slot_end}</p>
                                 <p><strong>Number of Players:</strong> {playground.num_players}</p>
+                                </div>
                             </div>
                             <div className="col-md-12">
-                                <h3>Book this Playground</h3>
+                                
                                 {message && <div className="alert alert-success">{message}</div>}
                                 {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                                 <form onSubmit={handleBooking}>
-                                    <div className="form-group">
-                                        <label htmlFor="date">Date</label>
-                                        <input
-                                            type="date"
-                                            id="date"
-                                            name="date"
-                                            className="form-control"
-                                            value={bookingData.date}
-                                            onChange={handleChange}
-                                            required
-                                            min={currentDate}  // Prevent selecting past dates
-                                        />
+                                <div className="form-group">
+                                <strong><label htmlFor="date" className="font-weight-bold">Select Date</label></strong>
+                                        <div className="d-flex flex-wrap">
+                                            {Array.from({ length: 7 }).map((_, index) => {
+                                                const date = new Date();
+                                                date.setDate(date.getDate() + index);
+                                                const formattedDate = date.toISOString().split("T")[0];
+                                                const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+                                                const month = date.toLocaleDateString('en-US', { month: 'short' });
+                                                const dateNum = date.getDate();
+
+                                                return (
+                                                    <div key={formattedDate} className="date-option">
+                                                        <input
+                                                            type="radio"
+                                                            id={`date-${formattedDate}`}
+                                                            name="date"
+                                                            value={formattedDate}
+                                                            checked={bookingData.date === formattedDate}
+                                                            onChange={handleChange}
+                                                            className="d-none"
+                                                        />
+                                                        <label htmlFor={`date-${formattedDate}`} className={`date-box ${bookingData.date === formattedDate ? 'selected' : ''}`}>
+                                                            <div className="day">{day}</div>
+                                                            <div className="date">{dateNum}</div>
+                                                            <div className="month">{month}</div>
+                                                        </label>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
+
                                     <div className="form-group">
-                                        <label htmlFor="time_slot">Time Slot</label>
-                                        <select
-                                            id="time_slot"
-                                            name="time_slot"
-                                            className="form-control"
-                                            value={bookingData.time_slot}
-                                            onChange={handleChange}
-                                            required
-                                        >
-                                            <option value="">Select Time Slot</option>
+                                        <strong><label className="font-weight-bold">Select Time Slot</label></strong>
+                                        <div className="d-flex flex-wrap">
                                             {availableTimeSlots.map((slot) => (
-                                                <option key={slot} value={slot}>
-                                                    {slot}
-                                                </option>
+                                                <div key={slot} className="time-option">
+                                                    <input
+                                                        type="radio"
+                                                        id={`time-${slot}`}
+                                                        name="time_slot"
+                                                        value={slot}
+                                                        checked={bookingData.time_slot === slot}
+                                                        onChange={handleChange}
+                                                        className="d-none"
+                                                    />
+                                                    <label htmlFor={`time-${slot}`} className={`time-box ${bookingData.time_slot === slot ? 'selected' : ''}`}>
+                                                        {slot}
+                                                    </label>
+                                                </div>
                                             ))}
-                                        </select>
+                                        </div>
                                     </div>
+
                                     <div className="form-group">
-                                        <label htmlFor="num_players">Number of Players</label>
-                                        <input
-                                            type="number"
-                                            id="num_players"
-                                            name="num_players"
-                                            className="form-control"
-                                            min="1"
-                                            max={playground.num_players}
-                                            value={bookingData.num_players}
-                                            onChange={handleChange}
-                                            required
-                                        />
+                                    <strong><label htmlFor="num_players" className="font-weight-bold">Number of Players</label></strong>
+                                        <div className="player-input-container">
+                                            <button
+                                                type="button"
+                                                className="player-btn"
+                                                onClick={() => setBookingData((prev) => ({
+                                                    ...prev,
+                                                    num_players: Math.max(1, prev.num_players - 1),
+                                                }))}
+                                            >
+                                                −
+                                            </button>
+                                            <input
+                                                type="number"
+                                                id="num_players"
+                                                name="num_players"
+                                                className="player-input"
+                                                min="1"
+                                                max={playground.num_players}
+                                                value={bookingData.num_players}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                            <button
+                                                type="button"
+                                                className="player-btn"
+                                                onClick={() => setBookingData((prev) => ({
+                                                    ...prev,
+                                                    num_players: Math.min(playground.num_players, prev.num_players + 1),
+                                                }))}
+                                            >
+                                                +
+                                            </button>
+                                        </div>
                                     </div>
-                                    <button type="submit" className="btn btn-primary">Book Now</button>
+                                    <div className="btn-book">
+                                        <button type="submit" className="btn btn-primary">Book Now</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

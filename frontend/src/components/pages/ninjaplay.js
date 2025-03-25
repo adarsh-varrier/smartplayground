@@ -5,6 +5,7 @@ import '../../styles/head-common.css';
 import DashHead from '../reuse/header2';
 
 import humanImage from '../../assets/Human.jpg';
+import { Link } from 'react-router-dom';
 
 function NinjaPlay() {
   const canvasRef = useRef(null);
@@ -187,6 +188,11 @@ function NinjaPlay() {
               </div>
             )}
           </div>
+            <div className="d-flex justify-content-end mb-3">
+                <Link to={`/Ninja`} className="btn btn-outline-primary">
+                    Quit
+                </Link>
+            </div>
         </div>
       </div>
     </div>
