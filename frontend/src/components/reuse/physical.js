@@ -1,34 +1,44 @@
 import { useEffect, useState } from "react";
+import '../../styles/physical.css';
 
 const PhysicalData = () => {
-  const [fitData, setFitData] = useState(null);
-  const token = localStorage.getItem("authToken"); // Get stored user token
-  console.log("token from physical:",token)
+  const [fitData, setFitData] = useState(
+    JSON.parse(localStorage.getItem("lastFitData")) || null
+  );
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("authToken"); 
 
   useEffect(() => {
-    if (!token) return; // Avoid making API calls if token is missing
+    if (!token) return;
 
     fetch("http://127.0.0.1:8000/api/google-fit/", {
-      headers: { Authorization: `Token ${token}` }  // Include token for authentication
+      headers: { Authorization: `Token ${token}` }
     })
       .then(response => response.json())
-      .then(data => setFitData(data))
-      .catch(error => console.error("Error fetching Google Fit data:", error));
-  }, [token]); 
+      .then(data => {
+        setFitData(data);
+        localStorage.setItem("lastFitData", JSON.stringify(data)); // Store last fetched data
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error("Error fetching Google Fit data:", error);
+        setLoading(false);
+      });
+  }, [token]);
 
   return (
-    <div>
+    <div className="google-fit-container">
       <h1>Google Fit Data</h1>
-      {fitData ? (
-        <ul>
-          {Object.entries(fitData.data).map(([key, value]) => (
+      {loading && !fitData ? (
+        <p className="loading-text">Loading Google Fit data...</p>
+      ) : (
+        <ul className="google-fit-list">
+          {Object.entries(fitData?.data || {}).map(([key, value]) => (
             <li key={key}>
               <strong>{key}:</strong> {value}
             </li>
           ))}
         </ul>
-      ) : (
-        <p>Loading Google Fit data...</p>
       )}
     </div>
   );

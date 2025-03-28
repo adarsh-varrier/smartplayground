@@ -1,0 +1,74 @@
+.uv-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #ffeb3b, #ff9800);
+    color: #333;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Each column */
+.uv-container .col {
+    flex: 1;
+    padding: 15px;
+    min-width: 300px; /* Prevents shrinking too much */
+}
+
+/* Headings */
+.uv-container h2,
+.uv-container h3 {
+    font-size: 22px;
+    color: #222;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Paragraphs */
+.uv-container p {
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-weight: 500;
+}
+
+/* Sun Exposure List */
+.uv-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.uv-container li {
+    font-size: 16px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    margin: 5px 0;
+    transition: background 0.3s ease-in-out;
+    text-align: center;
+}
+
+.uv-container li:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .uv-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .uv-container .col {
+        min-width: 100%;
+    }
+}

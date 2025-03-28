@@ -4,7 +4,7 @@ from .views import (
     PlaygroundCustomerView, PlaygroundDetailView2, BookPlayground,
     BookedSlotsView, BookingDetailView, OwnerBookingDetailView,
     UpdateBookingStatusView, GetPlaygroundWeather, NotificationListView,
-    DeleteNotifi, Location, MarkNotificationsReadView, UnreadNotificationCountView
+    DeleteNotifi, Location, MarkNotificationsReadView, UnreadNotificationCountView, UVIndexView,
       # Correct import
 )
 from . import views
@@ -31,6 +31,8 @@ urlpatterns = [
     path('api/notifications/unread-count/', UnreadNotificationCountView.as_view(), name='unread-count'),
     path('api/locations/', Location.as_view(), name='get_locations'),
     path('api/google-fit/', views.fetch_google_fit_view, name='fetch_google_fit'),
+    path('api/google-fit/sign-out/', views.google_fit_sign_out_view, name='google_fit_sign_out'),
+    path("api/playground/<int:playground_id>/uv-data/", UVIndexView.as_view(), name="uv-data"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

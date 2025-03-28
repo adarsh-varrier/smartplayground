@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../../styles/weather.css';
 
 function WeatherData2({ id }) {
     const [weather, setWeather] = useState(null);
@@ -81,26 +82,30 @@ function WeatherData2({ id }) {
             </div>
 
             {/* Next 48-Hour Forecast */}
-            {futureWeather.length > 0 ? (
-                <div className="card shadow-lg mb-4">
-                    <div className="card-body">
-                        <h2 className="card-title text-center">Next 48 Hours Forecast</h2>
-                        <div className="row">
-                            {futureWeather.map((hourly, index) => (
-                                <div className="col-md-3 mb-3" key={index}>
-                                    <div className="card text-center">
-                                        <div className="card-body">
-                                            <h6>{new Date(hourly.dt * 1000).toLocaleString()}</h6>
-                                            <p><strong>Temp:</strong> {hourly.main.temp}°C</p>
-                                            <p><strong>Weather:</strong> {hourly.weather[0]?.description}</p>
-                                            <img src={`http://openweathermap.org/img/wn/${hourly.weather[0]?.icon}.png`} alt="weather-icon" className="img-fluid" />
-                                        </div>
+        {futureWeather.length > 0 ? (
+            <div className="card shadow-lg mb-4">
+                <div className="card-body">
+                    <h2 className="card-title text-center">Next 48 Hours Forecast</h2>
+                    <div className="forecast-container">
+                        {futureWeather.map((hourly, index) => (
+                            <div className="forecast-item" key={index}>
+                                <div className="card text-center">
+                                    <div className="card-body">
+                                        <h6>{new Date(hourly.dt * 1000).toLocaleString()}</h6>
+                                        <p><strong>Temp:</strong> {hourly.main.temp}°C</p>
+                                        <p><strong>Weather:</strong> {hourly.weather[0]?.description}</p>
+                                        <img 
+                                            src={`http://openweathermap.org/img/wn/${hourly.weather[0]?.icon}.png`} 
+                                            alt="weather-icon" 
+                                            className="img-fluid"
+                                        />
                                     </div>
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
+            </div>
             ) : (
                 <p className="text-center">Loading future weather data...</p>
             )}

@@ -18,8 +18,15 @@ from smartplay.utils.weather import get_weather_data, get_future_weather_data
 from .models import Notification
 from .serializers import NotificationSerializer
 from smartplay.models import CustomUser
-from backend.google_fit_api import fetch_all_google_fit_data
+from backend.google_fit_api import fetch_all_google_fit_data, google_fit_sign_out
 from django.utils import timezone
+
+from django.http import JsonResponse
+from django.views import View
+from .models import Playground
+import requests
+
+
 # API view to register a new Playground
 class PlaygroundRegisterView(APIView):
     permission_classes = [IsAuthenticated]
@@ -406,3 +413,84 @@ def fetch_google_fit_view(request):
 
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
+    
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def google_fit_sign_out_view(request):
+    """ API endpoint to sign out from Google Fit """
+    user_id = request.user.id
+
+    if not user_id:
+        return JsonResponse({"status": "error", "message": "User not authenticated"}, status=401)
+
+    response = google_fit_sign_out(user_id)  # Call sign-out function
+    return JsonResponse(response, status=200 if response["status"] == "success" else 400)
+
+    
+
+
+class UVIndexView(View):
+    """
+    API view to fetch real-time UV index and sun protection advice for a playground.
+    """
+    def get(self, request, playground_id):
+        try:
+            playground = Playground.objects.get(id=playground_id)
+        except Playground.DoesNotExist:
+            return JsonResponse({"error": "Playground not found"}, status=404)
+
+        API_KEY = "openuv-43570rm7lngfzn-io"
+        if not playground.latitude or not playground.longitude:
+            return JsonResponse({"error": "Playground does not have coordinates"}, status=400)
+
+        url = f"https://api.openuv.io/api/v1/uv?lat={playground.latitude}&lng={playground.longitude}"
+        headers = {"x-access-token": API_KEY}
+
+        try:
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                data = response.json().get("result", {})
+
+                uv_index = data.get("uv", None)
+                uv_max = data.get("uv_max", None)
+                uv_max_time = data.get("uv_max_time", None)
+                ozone = data.get("ozone", None)
+                sun_info = data.get("sun_info", {})
+                safe_exposure = data.get("safe_exposure_time", {})
+
+                sun_advice = self.get_sun_advice(uv_index)
+
+                return JsonResponse({
+                    "uv_index": uv_index,
+                    "uv_max": uv_max,
+                    "uv_max_time": uv_max_time,
+                    "ozone": ozone,
+                    "sun_protection_advice": sun_advice,
+                    "safe_exposure_time": safe_exposure,
+                    "sun_info": sun_info
+                })
+            else:
+                return JsonResponse({"error": "Failed to fetch UV data"}, status=500)
+        except requests.RequestException as e:
+            return JsonResponse({"error": f"API request failed: {e}"}, status=500)
+
+    def get_sun_advice(self, uv_index):
+        """
+        Returns sun protection advice based on the UV index level.
+        """
+        if uv_index is None:
+            return "No UV data available."
+
+        if uv_index < 3:
+            return "Low UV risk. No special protection needed."
+        elif 3 <= uv_index < 6:
+            return "Moderate UV risk. Wear sunglasses and apply SPF 30+ sunscreen."
+        elif 6 <= uv_index < 8:
+            return "High UV risk. Wear protective clothing, sunglasses, and SPF 50+ sunscreen."
+        elif 8 <= uv_index < 11:
+            return "Very high UV risk. Avoid direct sun exposure, seek shade, and use SPF 50+ sunscreen."
+        else:
+            return "Extreme UV risk! Stay indoors between 10 AM - 4 PM, and apply SPF 50+ sunscreen frequently."
+
+

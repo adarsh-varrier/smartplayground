@@ -1,0 +1,78 @@
+.weather-uv-container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: linear-gradient(135deg, #87CEFA, #FFEB3B);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+/* Headings */
+.weather-uv-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+/* Flexbox for weather and UV info */
+.weather-uv-container .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Columns */
+.weather-uv-container .col {
+    flex: 1;
+    min-width: 300px;
+    padding: 15px;
+}
+
+/* Weather and UV Info Styling */
+.weather-info,
+.uv-info {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.weather-info:hover,
+.uv-info:hover {
+    transform: scale(1.05);
+}
+
+.weather-info img {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+}
+
+/* Suggestion Box */
+.suggestion-box {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .weather-uv-container .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .weather-uv-container .col {
+        min-width: 100%;
+    }
+}

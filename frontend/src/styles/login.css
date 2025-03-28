@@ -44,7 +44,7 @@
   
   /* Card Styling */
   .card {
-    background: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
+    background: rgb(53, 183, 30); /* Dark semi-transparent background */
     color: #fff;
     border-radius: 10px;
   }

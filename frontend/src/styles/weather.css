@@ -1,0 +1,29 @@
+.forecast-container {
+    display: flex;
+    overflow-x: auto;  /* Enables horizontal scrolling */
+    gap: 15px;
+    padding: 10px;
+    white-space: nowrap;
+    scrollbar-width: thin;  /* For Firefox */
+    scrollbar-color: #888 transparent;  /* Custom scrollbar */
+}
+
+/* Scrollbar for Chrome, Safari */
+.forecast-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.forecast-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.forecast-item {
+    flex: 0 0 auto;
+    width: 200px; /* Adjust width as needed */
+}
+
+.card {
+    width: 100%;
+    min-width: 180px; /* Ensures card is readable */
+}

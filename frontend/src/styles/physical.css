@@ -1,0 +1,45 @@
+.google-fit-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+  
+  .google-fit-container h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .google-fit-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .google-fit-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    color: #444;
+  }
+  
+  .google-fit-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .google-fit-list li strong {
+    color: #2c3e50;
+  }
+  
+  .loading-text {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+  }
+  

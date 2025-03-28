@@ -4,6 +4,8 @@ import DashHead from "../reuse/header2";
 import Sidebar from "../reuse/user-side";
 import WeatherData2 from '../reuse/weather2';
 import ReviewComponent from '../reuse/review';
+import UvRate from '../reuse/uv';
+import PlaygroundWeatherUV from '../reuse/suggession';
 
 function PlaygroundDetail2() {
     const { id } = useParams();  // Access the playground ID from the URL
@@ -51,6 +53,7 @@ function PlaygroundDetail2() {
                 <div className="dashboard-container">
                     <Sidebar />
                     <div className="dashboard-content">
+                      
                         <p className="text-center display-4">Playground Details</p>
                             <div className="d-flex justify-content-end mb-3">
                                 <Link to={`/playglist`} className="btn btn-outline-primary">
@@ -86,6 +89,14 @@ function PlaygroundDetail2() {
                                 </div>
                                 <div>
                                     <WeatherData2 id={playground.id} />
+                                </div>
+
+                                <div>
+                                    <UvRate playgroundId={playground.id}/>
+                                </div>
+                                
+                                <div>
+                                    <PlaygroundWeatherUV playgId={playground.id} />
                                 </div>
                                 <div className="text-center mt-4">
                                     <Link 
