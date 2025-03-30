@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../styles/booked-list.css'; 
 
 function Confirmation() {
   const [bookings, setBookings] = useState([]);
@@ -70,18 +71,19 @@ function Confirmation() {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="booking-management-container">
 
-      <div className="card shadow p-4">
-        <h2 className="text-center text-success">Booked Users for Your Playgrounds</h2>
-
-        {loading && <p className="text-center text-info fw-bold">Loading bookings...</p>}
-        {error && <p className="text-center text-danger fw-bold">{error}</p>}
+      <div className="booked-users">
+        <h2 className="booked-title">Booked Users for Your Playgrounds</h2>
+        <div className='booked-msg'>
+          {loading && <p className="text-center text-info fw-bold">Loading bookings...</p>}
+          {error && <p className="text-center text-danger fw-bold">{error}</p>}
+        </div>
 
         {!loading && !error && bookings.length > 0 ? (
-          <div className="table-responsive">
-            <table className="table table-striped table-hover table-bordered text-center">
-              <thead className="table-dark">
+          <div className="booked-table">
+            <table className="booked-table-content">
+              <thead>
                 <tr>
                   <th>Ticket #</th>
                   <th>Customer Name</th>

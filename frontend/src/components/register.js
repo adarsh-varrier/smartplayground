@@ -148,8 +148,8 @@ const Register = () => {
           <img src={myImage} alt="Register Background" className="bg-image" />
         </div>
 
-        <div className="register-form container my-5 py-4">
-          <h2 className="text-center mb-4">Register</h2>
+        <div className="register-form">
+          <h2 className="reg-head">Register</h2>
           <Link className="nav-link" to="/login">
             Already have an account? <b>Login</b>
           </Link>

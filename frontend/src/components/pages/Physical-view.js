@@ -6,6 +6,7 @@ import '../../styles/head-common.css';
 import DashHead from '../reuse/header2';
 import PhysicalData from '../reuse/physical';
 import GfitSignOut from '../reuse/Gfit-signout';
+import PhysicalSuggesion from '../reuse/physicalsuggesion';
 
 function PhysicalView() {
    return (
@@ -20,6 +21,9 @@ function PhysicalView() {
               <div>                
                   <div>
                     <PhysicalData/>
+                  </div>
+                  <div>
+                    <PhysicalSuggesion/>
                   </div>
                   <div>
                     <GfitSignOut/>

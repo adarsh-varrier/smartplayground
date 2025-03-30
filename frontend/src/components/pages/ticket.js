@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DashHead from '../reuse/header2';
 import Sidebar from '../reuse/user-side';
+import '../../styles/ticket.css';
 
 function Ticket() {
   const [bookings, setBookings] = useState([]);
@@ -51,46 +52,46 @@ function Ticket() {
       <div className='dashboard-container'>
         <Sidebar />
         <div className='dashboard-content'>
-          <div className="col-md-9">
-          <h2 className="mb-4">Your Booking Ticket</h2>
-          {loading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p className="text-danger">{error}</p>
-          ) : bookings.length === 0 ? (
-            <p className="text-warning">No bookings found.</p>
-          ) : (
-            <div className="row">
-              {bookings.map((booking, index) => (
-                <div key={index} className="col-md-6 mb-4">
-                  <div className="card ticket-card">
-                    <div className="card-body">
-                      <h5 className="card-title text-center fw-bold">
-                        🎟️ Ticket #{booking.ticket_number}
-                      </h5>
-                      <hr className="dashed-line" />
-                      <p>
-                        <strong>Playground:</strong> {booking.playground}
-                      </p>
-                      <p>
-                        <strong>Time Slot:</strong> {booking.time_slot}
-                      </p>
-                      <p>
-                        <strong>Date:</strong> {booking.date}
-                      </p>
-                      <p>
-                        <strong>Players:</strong> {booking.num_players}
-                      </p>
+          <div className="tickets">
+              <h2 className="ticket-head">Your Booking Ticket</h2>
+              {loading ? (
+                <p>Loading...</p>
+              ) : error ? (
+                <p className="text-danger">{error}</p>
+              ) : bookings.length === 0 ? (
+                <p className="text-warning">No bookings found.</p>
+              ) : (
+                <div className="ticket-row">
+                  {bookings.map((booking, index) => (
+                    <div key={index} className="ticket-col">
+                      <div className="ticket-card">
+                        <div className="ticket-body">
+                          <h5 className="ticket-number">
+                            🎟️ Ticket #{booking.ticket_number}
+                          </h5>
+                          <hr className="dashed-line" />
+                          <p>
+                            <strong>Playground:</strong> {booking.playground}
+                          </p>
+                          <p>
+                            <strong>Time Slot:</strong> {booking.time_slot}
+                          </p>
+                          <p>
+                            <strong>Date:</strong> {booking.date}
+                          </p>
+                          <p>
+                            <strong>Players:</strong> {booking.num_players}
+                          </p>
+                        </div>
+                        <div className="ticket-footer">
+                          <p className="small text-muted">📌 Keep this ticket for entry</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="ticket-footer text-center">
-                      <p className="small text-muted">📌 Keep this ticket for entry</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
+              )}
+          </div>
         </div>
       </div>
     </div>

@@ -15,9 +15,11 @@ function BookingView() {
         <div className='dashboard-container'>
             <Sidebar2/>
             <div className='dashboard-content'>
-              <h2>Booking</h2>
-              <div>
-                <Confirmation/>
+              <div className='owner-booking'>
+                <h2 className='owner-booking-title'>Booking</h2>
+                <div className='booking-list'>
+                  <Confirmation/>
+                </div>
               </div>
             </div>
         </div>

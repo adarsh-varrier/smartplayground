@@ -5,7 +5,6 @@ import '../styles/head-common.css';
  
 import WeatherData from './reuse/weather';
 import DashHead from './reuse/header2';
-import PhysicalData from './reuse/physical';
 
 function CustomerDashboard() {
    return (

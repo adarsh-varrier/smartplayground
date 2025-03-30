@@ -33,6 +33,8 @@ urlpatterns = [
     path('api/google-fit/', views.fetch_google_fit_view, name='fetch_google_fit'),
     path('api/google-fit/sign-out/', views.google_fit_sign_out_view, name='google_fit_sign_out'),
     path("api/playground/<int:playground_id>/uv-data/", UVIndexView.as_view(), name="uv-data"),
+    path('api/google-fit/fetch-store/', views.fetch_and_store_google_fit_view, name='fetch_store_google_fit'),
+    path('api/google-fit/last-five-days/', views.fetch_last_five_days_data, name='fetch_last_five_days_data'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,226 @@
+/* Main Container */
+.owner-view-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Back Button */
+.btn-outline-primary {
+    border: 2px solid #4f46e5;
+    color: #4f46e5;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-outline-primary:hover {
+    background-color: #4f46e5;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+/* Playground Details Container */
+.owner-playg-details {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+/* Image Styling */
+.owner-img-top {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+/* Details Text Styling */
+.owner-playg-details h2 {
+    font-size: 2rem;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.owner-playg-details h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #4f46e5, #10b981);
+    border-radius: 3px;
+}
+
+.owner-playg-details p {
+    font-size: 1.1rem;
+    color: #334155;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.owner-playg-details p::before {
+    content: '•';
+    color: #4f46e5;
+    position: absolute;
+    left: -0.5rem;
+}
+
+.owner-playg-details strong {
+    color: #1e293b;
+    font-weight: 600;
+    min-width: 150px;
+    display: inline-block;
+}
+
+/* Price Highlight */
+.owner-playg-details p:has(strong + "₹") {
+    font-size: 1.3rem;
+    color: #10b981;
+    font-weight: 700;
+    margin-top: 1rem;
+}
+
+/* Action Buttons */
+.btn-owner {
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-warning {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #d97706;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(245, 158, 11, 0.3);
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Edit Form Styling */
+.edit-form {
+    margin-top: 2rem;
+}
+
+.owner-edit {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.owner-edit-details {
+    margin-bottom: 1.5rem;
+}
+
+.owner-edit-details strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    outline: none;
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+.owner-feild{
+    text-align: left;
+}
+
+.owner-edit-sub {
+    background-color: #4f46e5;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.owner-edit-sub:hover {
+    background-color: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+/* Functional Sections */
+.owner-func {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .owner-view-container {
+        padding: 1rem;
+    }
+    
+    .owner-playg-details h2 {
+        font-size: 1.7rem;
+    }
+    
+    .owner-playg-details p {
+        font-size: 1rem;
+    }
+    
+    .owner-playg-details strong {
+        min-width: 120px;
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+}

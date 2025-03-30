@@ -10,20 +10,21 @@
     margin: 0px 0;
   }
   
-  .background {
+  .login-background {
     position: absolute;
     top: 0;
     left: 0;
-    width: 99%;
-    height: 100%;
+    width: 100%;
+    height: 103%;
     overflow: hidden;
   }
   
-  .bg-image {
+  .login-bg-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit:fill;
   }
+
   
   /* Centered Login Form */
   .login-form {
@@ -43,8 +44,8 @@
   }
   
   /* Card Styling */
-  .card {
-    background: rgb(53, 183, 30); /* Dark semi-transparent background */
+  .login-form-container {
+    background: rgb(52, 65, 50); /* Dark semi-transparent background */
     color: #fff;
     border-radius: 10px;
   }
@@ -52,22 +53,44 @@
   /* Input Fields */
   .form-control {
     background: rgba(255, 255, 255, 0.8);
-    border: none;
+    border:#fff;
     border-radius: 5px;
   }
+  .login-field{
+    padding: 12px 15px;
+    border: 1px solid #131111;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    box-sizing: border-box; 
+  }
   
-  /* Button */
-  .btn-primary {
-    background: #007bff;
+  .login-btn {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0 2rem; /* Add equal padding instead of margin-left */
+      
+  }
+
+.btn-primary {
+    width: 50%;
+    padding: 12px;
+    background-color: #4f46e5;
+    color: white;
     border: none;
-    padding: 10px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-  
-  .btn-primary:hover {
-    background: #0056b3;
-  }
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
   
   /* Forgot Password Link */
   .text-center a {

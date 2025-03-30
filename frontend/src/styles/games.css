@@ -1,0 +1,219 @@
+/* 🎮 Game Section Container */
+.games {
+    text-align: center;
+    background: radial-gradient(circle, #162447, #1f4068);
+    padding: 50px 20px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    margin: 30px auto;
+    max-width: 700px;
+    transition: transform 0.3s ease;
+}
+
+.games:hover {
+    transform: scale(1.02);
+}
+
+/* 🏆 Game Section Header */
+.game-head {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f8f9fa;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+}
+
+/* 🎲 Game List */
+.game-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 🎯 Game Item */
+.gameplay {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    padding: 15px;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 🌀 Glowing Effect on Hover */
+.gameplay::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent);
+    transition: all 0.6s ease-in-out;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+.gameplay:hover::before {
+    top: 0;
+    left: 0;
+    opacity: 1;
+}
+
+.gameplay:hover {
+    transform: scale(1.08);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 🎮 Game Links */
+.game {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: block;
+    transition: color 0.4s ease;
+    position: relative;
+}
+
+.game::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #ffcc00;
+    transition: width 0.4s ease;
+    margin-top: 5px;
+}
+
+.game:hover {
+    color: #ffcc00;
+    text-shadow: 0px 0px 15px rgba(255, 204, 0, 0.8);
+}
+
+.game:hover::after {
+    width: 100%;
+}
+
+/* 📱 Responsive Adjustments */
+@media (max-width: 768px) {
+    .games {
+        padding: 40px 15px;
+    }
+    
+    .game-head {
+        font-size: 2rem;
+    }
+
+    .game {
+        font-size: 1.5rem;
+    }
+}
+
+/*link to sart*/
+
+/* 🎮 Back Button */
+.back-btn {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.game-back-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #ff6a00, #ee0979);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(255, 105, 135, 0.5);
+}
+
+.game-back-btn:hover {
+    background: linear-gradient(135deg, #ee0979, #ff6a00);
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(255, 105, 135, 0.8);
+}
+
+/* 🎲 Game Title */
+.game-head {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #a50909;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+/* 🎯 Game Start List */
+.gane-start {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* 🎮 Start Game Button */
+.nested-game {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    padding: 15px 25px;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(30, 60, 114, 0.5);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 🌀 Hover Glow Effect */
+.nested-game:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
+    box-shadow: 0px 10px 25px rgba(42, 82, 152, 0.8);
+}
+
+/* 🎮 Link to Start Game */
+.link-to-game {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: bold;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.link-to-game:hover {
+    color: #ffcc00;
+    text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8);
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+    .game-head {
+        font-size: 2.2rem;
+    }
+
+    .game-back-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .nested-game {
+        padding: 12px 20px;
+    }
+
+    .link-to-game {
+        font-size: 1.4rem;
+    }
+}
+

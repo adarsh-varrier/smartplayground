@@ -1,0 +1,171 @@
+/* 🌟 Wordle Game Container */
+.wordle-game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    padding: 20px;
+}
+
+/* 🏆 Wordle Title */
+.wordle-head {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+    margin-bottom: 20px;
+}
+
+/* 📜 Wordle Grid */
+.grid {
+    display: grid;
+    gap: 10px;
+}
+
+/* 🔲 Wordle Cells */
+.cell {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #ccc;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ Correct Letter (Green) */
+.correct {
+    background-color: #4caf50 !important; /* Green */
+    color: white;
+    border-color: #388e3c;
+    box-shadow: 0px 0px 12px rgba(76, 175, 80, 0.8);
+}
+
+/* 🟡 Present but Wrong Position (Yellow) */
+.present {
+    background-color: #ffeb3b !important; /* Yellow */
+    color: #333;
+    border-color: #fbc02d;
+    box-shadow: 0px 0px 12px rgba(255, 235, 59, 0.8);
+}
+
+/* ⬜ Not in Word (Gray/Silver) */
+.absent {
+    background-color: #9e9e9e !important; /* Gray */
+    color: white;
+    border-color: #757575;
+    box-shadow: 0px 0px 12px rgba(158, 158, 158, 0.8);
+}
+
+/* 🔄 Reset Button */
+.btn-secondary {
+    background-color: #ff5722;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(255, 87, 34, 0.5);
+}
+
+.btn-secondary:hover {
+    background-color: #e64a19;
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(255, 87, 34, 0.8);
+}
+
+/* ❌ Quit Button */
+.btn-outline-primary {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: #ffffff;
+    color: #1e3c72;
+}
+
+/* 🏁 Wordle Result Message */
+.wordle-result {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.5);
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+    .wordle-head {
+        font-size: 2rem;
+    }
+
+    .cell {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .btn-secondary {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    .btn-outline-primary {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .wordle-result {
+        font-size: 1.2rem;
+        padding: 10px;
+    }
+}
+
+/* 🟩 Correct Letter (Green) */
+.cell-correct {
+    background-color: #4caf50 !important; /* Bright Green */
+    color: white;
+    border-color: #388e3c;
+    box-shadow: 0px 0px 8px rgba(76, 175, 80, 0.8);
+}
+
+/* 🟡 Present but Wrong Position (Yellow) */
+.cell-present {
+    background-color: #ffeb3b !important; /* Bright Yellow */
+    color: black;
+    border-color: #fbc02d;
+    box-shadow: 0px 0px 8px rgba(255, 235, 59, 0.8);
+}
+
+/* ⬜ Not in Word (Gray/Silver) */
+.cell-absent {
+    background-color: #9e9e9e !important; /* Light Gray */
+    color: white;
+    border-color: #757575;
+    box-shadow: 0px 0px 8px rgba(158, 158, 158, 0.8);
+}
+
+/* Default Empty Cell */
+.cell-default {
+    background-color: #f8f9fa !important; /* Light Silver */
+    color: black;
+    border-color: #ddd;
+}

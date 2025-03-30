@@ -1,14 +1,117 @@
+/* General Container */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Current Date and Time */
+.current-date {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.text-date {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* 🌤 Current Weather Styling */
+.card-weather {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-weather:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Location & Temperature */
+.card-title-weather {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.current-weather {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.8;
+}
+
+/* Weather Icon */
+.img-weather {
+    width: 90px;
+    height: 90px;
+    margin-top: 10px;
+    transition: transform 0.3s ease;
+}
+
+.img-weather:hover {
+    transform: scale(1.1);
+}
+
+/* Temperature Grid */
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.col {
+    flex: 1;
+    text-align: center;
+}
+
+/* Loading Text */
+.text-loading {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+    margin-top: 20px;
+}
+
+/* 🌥 Next 48 Hours Forecast */
+.card-nextweather {
+    background: linear-gradient(to bottom, #2c3e50, #3498db);
+    color: white;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card-txt-next-weather {
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 15px;
+    color: aliceblue;
+}
+
+/* Forecast Scrolling Container */
 .forecast-container {
     display: flex;
-    overflow-x: auto;  /* Enables horizontal scrolling */
+    overflow-x: auto;
     gap: 15px;
     padding: 10px;
     white-space: nowrap;
-    scrollbar-width: thin;  /* For Firefox */
-    scrollbar-color: #888 transparent;  /* Custom scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
 }
 
-/* Scrollbar for Chrome, Safari */
+/* Scrollbar Styling for Chrome/Safari */
 .forecast-container::-webkit-scrollbar {
     height: 8px;
 }
@@ -18,12 +121,72 @@
     border-radius: 10px;
 }
 
+/* Forecast Items */
 .forecast-item {
     flex: 0 0 auto;
-    width: 200px; /* Adjust width as needed */
+    width: 220px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.card {
-    width: 100%;
-    min-width: 180px; /* Ensures card is readable */
+.forecast-item:hover {
+    transform: scale(1.08);
+}
+
+/* Nested Forecast Cards */
+.nested-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.card-body2 {
+    text-align: center;
+}
+
+.nxt-weather-head {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.nxt-weather-data {
+    font-size: 1rem;
+    color: #ddd;
+}
+
+/* Forecast Weather Icons */
+.img-wather {
+    width: 55px;
+    height: 55px;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .card-weather {
+        padding: 20px;
+    }
+
+    .current-weather {
+        font-size: 1rem;
+    }
+
+    .forecast-container {
+        gap: 12px;
+    }
+
+    .forecast-item {
+        width: 190px;
+    }
 }

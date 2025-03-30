@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../styles/Gsignout.css'; 
 
 const GfitSignOut = () => { 
 
@@ -26,9 +27,9 @@ const GfitSignOut = () => {
   };
 
   return (
-    <div>
-      <p>Sign out from Google Fit</p>
-      <button onClick={handleSignOut} style={{ padding: "10px", background: "red", color: "white", border: "none", cursor: "pointer" }}>
+    <div className='Gsignout'>
+      <p className='Ghead'>Sign out from Google Fit</p>
+      <button onClick={handleSignOut} className='G-btn'>
         Sign Out
       </button>
     </div>

@@ -77,15 +77,15 @@ const Login = () => {
       <Header />
       <div className="row justify-content-center">
         <div className="login-container">
-          <div className="background">
-            <img src={myImage} alt="Login Background" className="bg-image" />
+          <div className="login-background">
+            <img src={myImage} alt="Login Background" className="login-bg-image" />
           </div>
           <div className="login-form">
-            <h2 className="text-center mb-4">Login</h2>
+            <h2 className="login-head">Login</h2>
             <Link className="nav-link" to="/register">Create new account</Link>
-            <div className="card p-4 shadow-lg">
+            <div className="login-form-container">
               <form onSubmit={handleSubmit}>
-                <div className="mb-3">
+                <div className="login-field">
                   <label className="form-label" htmlFor="email">Email</label>
                   <input
                     type="email"
@@ -97,7 +97,7 @@ const Login = () => {
                   />
                   {errors.email && <small className="text-danger">{errors.email}</small>}
                 </div>
-                <div className="mb-3">
+                <div className="login-field">
                   <label className="form-label" htmlFor="password">Password</label>
                   <input
                     type="password"
@@ -109,9 +109,11 @@ const Login = () => {
                   />
                   {errors.password && <small className="text-danger">{errors.password}</small>}
                 </div>
-                <button type="submit" className="btn btn-primary w-100 mt-3">
-                  Login
-                </button>
+                <div className="login-btn">
+                  <button type="submit" className="btn btn-primary w-50">
+                    Login
+                  </button>
+                </div>
                 <div className="text-center mt-2">
                   <Link to="/forgot">Forgot password?</Link>
                 </div>

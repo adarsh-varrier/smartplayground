@@ -138,7 +138,7 @@ function DashHead() {
                         <Link className="nav-link position-relative" to="/notifications">
                           <FaBell />
                           {unreadCount > 0 && (
-                          <span className="badge bg-danger position-absolute top-0 start-100 translate-middle">
+                          <span className="notifi-count">
                               {unreadCount}
                           </span>
                           )}

@@ -3,3 +3,52 @@
     padding: 5px 8px;
     border-radius: 50%;
 }
+
+/* 🔔 Notification Bell Icon */
+.nav-link {
+    position: relative;
+    color: #333;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+
+/* 🔴 Notification Count Badge */
+.notifi-count {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    transform: translate(50%, -50%);
+    background: #ff3b30; /* Bright red for visibility */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 4px 8px;
+    min-width: 15px;
+    min-height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 6px rgba(255, 0, 0, 0.6);
+    animation: pulse 1.5s infinite;
+}
+
+/* 🔄 Pulse Animation for Attention */
+@keyframes pulse {
+    0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.6); }
+    50% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.6); }
+}
+
+/* 📱 Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .notifi-count {
+        font-size: 0.7rem;
+        padding: 5px 8px;
+        min-width: 18px;
+        min-height: 18px;
+    }
+}

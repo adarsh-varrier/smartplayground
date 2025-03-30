@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Sidebar from '../reuse/user-side';
 import '../../styles/user-dash.css';  
 import '../../styles/head-common.css'; 
+import '../../styles/wordle.css';
 import DashHead from '../reuse/header2';
 import { Link } from 'react-router-dom';
 
@@ -75,15 +76,15 @@ function WordlePlay() {
 
   const getCellColor = (rowIndex, cellIndex) => {
     const guess = guesses[rowIndex];
-    if (!guess || guess.length < 5) return 'bg-light';
+    if (!guess || guess.length < 5) return 'cell-default';
 
     const letter = guess[cellIndex];
     if (letter === targetWord[cellIndex]) {
-      return 'bg-success';
+      return 'cell-correct';
     } else if (targetWord.includes(letter)) {
-      return 'bg-warning';
+      return 'cell-present';
     } else {
-      return 'bg-secondary';
+      return 'cell-absent';
     }
   };
 
@@ -95,9 +96,9 @@ function WordlePlay() {
       <div className='dashboard-container'>
         <Sidebar />
         <div className='dashboard-content'>
-            <div className="container d-flex flex-column align-items-center justify-content-center vh-100">
+            <div className="wordle-game-container">
                 <div className="wordle-container text-center">
-                    <h2 className="mb-4 display-4 text-primary">Wordle</h2>
+                    <h2 className="wordle-head">Wordle</h2>
 
                     <div className="grid">
                     {Array.from({ length: 6 }).map((_, rowIndex) => (
@@ -105,7 +106,7 @@ function WordlePlay() {
                         {Array.from({ length: 5 }).map((_, cellIndex) => (
                             <div
                             key={cellIndex}
-                            className={`cell ${rowIndex < currentAttempt ? getCellColor(rowIndex, cellIndex) : 'bg-light'} text-dark d-flex align-items-center justify-content-center`}
+                            className={`cell ${rowIndex < currentAttempt ? getCellColor(rowIndex, cellIndex) : 'cell-default'} text-dark d-flex align-items-center justify-content-center`}
                             style={{ width: '60px', height: '60px', border: '2px solid #ccc', fontSize: '24px', fontWeight: 'bold' }}
                             >
                             {rowIndex === currentAttempt ? currentGuess[cellIndex] : guesses[rowIndex]?.[cellIndex]}
@@ -121,7 +122,7 @@ function WordlePlay() {
 
                     {/* Display result message */}
                     {resultMessage && (
-                    <div className="mt-3 p-3 bg-white shadow rounded text-dark fw-bold text-center">
+                    <div className="wordle-result">
                         {resultMessage}
                     </div>
                     )}

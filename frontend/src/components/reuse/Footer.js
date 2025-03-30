@@ -5,7 +5,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"; // Import i
 const Footer = () => {
   return (
     <footer className="bg-dark text-white text-center py-4 mt-auto" style={{ minHeight: "100px" }}>
-      <p>&copy; 2025 My Website. All rights reserved.</p>
+      <p className="text-white">&copy; 2025 CUCEK. All rights reserved.</p>
       
       {/* Social Media Icons */}
       <div className="d-flex justify-content-center gap-3 mt-2">

@@ -1,65 +1,159 @@
 .container {
-    max-width: 900px;
-    margin: 20px auto;
-    background: #ffffff;
-    padding: 20px;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
-.row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
+.cust-view-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
 }
 
-.col {
-    flex: 1;
-    min-width: 300px;
-    padding: 15px;
+.cust-view-text::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    border-radius: 2px;
 }
 
-/* Playground Image Styling */
-.col img {
-    width: 100%;
-    max-height: 300px;
+.btn-outline-primary {
+    border: 2px solid #3498db;
+    color: #3498db;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.btn-outline-primary:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.playg-details {
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.playg-title {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.details {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+.details strong {
+    color: #2c3e50;
+    font-weight: 600;
+    min-width: 160px;
+    display: inline-block;
+}
+
+.img-fluid {
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
     object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
 }
 
-/* Playground Details */
-h1.display-5 {
-    font-size: 28px;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 10px;
+.img-fluid:hover {
+    transform: scale(1.02);
 }
 
-p {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #555;
+.customer-func {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-p strong {
-    color: #333;
+.Book-btn {
+    text-align: center;
+    margin: 3rem 0;
 }
 
-/* Responsive Design */
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+    background: linear-gradient(135deg, #2980b9, #27ae60);
+}
+
+.cust-view-msg {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-center {
+    font-size: 1.2rem;
+}
+
+.text-danger {
+    color: #e74c3c;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .row {
+    .container {
+        padding: 1rem;
+    }
+    
+    .playg-details .row {
         flex-direction: column;
-        text-align: center;
     }
-
-    .col img {
-        max-height: 250px;
+    
+    .playg-details .col {
+        width: 100%;
+        margin-bottom: 1.5rem;
     }
-
-    h1.display-5 {
-        font-size: 24px;
+    
+    .playg-title {
+        font-size: 1.8rem;
+    }
+    
+    .details {
+        font-size: 1rem;
+    }
+    
+    .details strong {
+        min-width: 120px;
     }
 }

@@ -6,6 +6,7 @@ import WeatherData2 from '../reuse/weather2';
 import ReviewComponent from '../reuse/review';
 import UvRate from '../reuse/uv';
 import PlaygroundWeatherUV from '../reuse/suggession';
+import '../../styles/playg-customer.css'; 
 
 function PlaygroundDetail2() {
     const { id } = useParams();  // Access the playground ID from the URL
@@ -53,52 +54,54 @@ function PlaygroundDetail2() {
                 <div className="dashboard-container">
                     <Sidebar />
                     <div className="dashboard-content">
-                      
-                        <p className="text-center display-4">Playground Details</p>
+                        <div className='container'>
+                       
+                            <p className="cust-view-text">Playground Details</p>
                             <div className="d-flex justify-content-end mb-3">
                                 <Link to={`/playglist`} className="btn btn-outline-primary">
                                     Back
                                 </Link>
                             </div>
-        
-                        {/* Show Loading Message */}
-                        {loading && <p className="text-center">Loading playground details...</p>}
-        
-                        {/* Show Error Message */}
-                        {error && <p className="text-center text-danger">{error}</p>}
+                        <div className='cust-view-msg'>
+                            {/* Show Loading Message */}
+                            {loading && <p className="text-center">Loading playground details...</p>}
+            
+                            {/* Show Error Message */}
+                            {error && <p className="text-center text-danger">{error}</p>}
+                        </div>
         
                         {!loading && !error && playground && (
-                            <div className="container py-5">
+                            <div className="playg-details">
                                 <div className="row">
-                                    <div className="col-md-4">
+                                    <div className="col">
                                         <img
                                             src={`http://127.0.0.1:8000${playground.image}`}
                                             alt={playground.name}
                                             className="img-fluid rounded shadow"
                                         />
                                     </div>
-                                    <div className="col-md-8">
-                                        <h1 className="display-5">{playground.name}</h1>
-                                        <p><strong>Location:</strong> {playground.location}</p>
-                                        <p><strong>Address:</strong> {playground.address}</p>
-                                        <p><strong>Platform:</strong> {playground.platform_type}</p>
-                                        <p><strong>Price:</strong> {playground.price}</p>
-                                        <p><strong>Available Time Slot:</strong> {playground.time_slot_start} to {playground.time_slot_end}</p>
-                                        <p><strong>Number of Players:</strong> {playground.num_players}</p>
+                                    <div className="col">
+                                        <h1 className="playg-title">{playground.name}</h1>
+                                        <p className="details"><strong>Location:</strong> {playground.location}</p>
+                                        <p className="details"><strong>About:</strong> {playground.address}</p>
+                                        <p className="details"><strong>Platform:</strong> {playground.platform_type}</p>
+                                        <p className="details"><strong>Price:</strong> {playground.price}</p>
+                                        <p className="details"><strong>Available Time Slot:</strong> {playground.time_slot_start} to {playground.time_slot_end}</p>
+                                        <p className="details"><strong>Number of Players:</strong> {playground.num_players}</p>
                                     </div>
                                 </div>
-                                <div>
+                                <div className='customer-func'>
                                     <WeatherData2 id={playground.id} />
                                 </div>
 
-                                <div>
+                                <div className='customer-func'>
                                     <UvRate playgroundId={playground.id}/>
                                 </div>
                                 
-                                <div>
+                                <div className='customer-func'> 
                                     <PlaygroundWeatherUV playgId={playground.id} />
                                 </div>
-                                <div className="text-center mt-4">
+                                <div className="Book-btn">
                                     <Link 
                                         to={`/playground-customer-booking/${playground.id}`} 
                                         className="btn btn-primary btn-lg shadow-sm px-4 py-2"
@@ -106,11 +109,12 @@ function PlaygroundDetail2() {
                                         <i className="fas fa-calendar-check me-2"></i> Book Playground
                                     </Link>
                                 </div>
-                                <div>
+                                <div className='customer-func'>
                                     <ReviewComponent playgroundId={id} userToken={userToken} />
                                 </div>
                             </div>
                         )}
+                        </div>
                     </div>
                 </div>
             </div>

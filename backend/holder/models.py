@@ -92,3 +92,21 @@ class Notification(models.Model):
         return f"Notification for {self.user.username}: {self.message}"
     
 
+class GoogleFitData(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    steps = models.IntegerField(null=True, blank=True)
+    calories_burned = models.FloatField(null=True, blank=True)
+    active_minutes = models.IntegerField(null=True, blank=True)
+    heart_rate = models.IntegerField(null=True, blank=True)
+    distance_moved = models.FloatField(null=True, blank=True)
+    move_minutes = models.IntegerField(null=True, blank=True)
+    weight = models.FloatField(null=True, blank=True)
+    height = models.FloatField(null=True, blank=True)
+    sleep_data = models.IntegerField(null=True, blank=True)
+    activity_sessions = models.IntegerField(null=True, blank=True)
+    recorded_at = models.DateTimeField(auto_now_add=True)  # Timestamp for 24-hour check
+
+    def __str__(self):
+        return f"{self.user.username} - {self.recorded_at}"
+    
+

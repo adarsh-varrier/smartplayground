@@ -5,6 +5,8 @@ import Sidebar2 from "../reuse/owner-side";
 import WeatherData2 from "../reuse/weather2";
 import Sidebar3 from "../reuse/admin-side";
 import ReviewComponent from "../reuse/review";
+import '../../styles/playg-owner.css'; 
+
 
 function PlaygroundDetail() {
     const { id } = useParams(); // Get the playground ID from the URL
@@ -166,171 +168,176 @@ function PlaygroundDetail() {
             <div className="dashboard-container">
             {userdetails && userdetails.user_type === 'Owner' ? <Sidebar2 /> : <Sidebar3 />}
                 <div className="dashboard-content">
+                    <div className="owner-view-container">
                     {console.log("playg-id",id)}
-                    {userdetails && userdetails.user_type === "Owner" && (
-                    <div className="d-flex justify-content-end mb-3">
-                            <Link to={`/ownerplay`} className="btn btn-outline-primary">
-                                Back
-                            </Link>
-                    </div>
-                    )}
-                    {userdetails && userdetails.user_type !== "Owner" && (
-                    <div className="d-flex justify-content-end mb-3">
-                            <Link to={`/PlaygManagement`} className="btn btn-outline-primary">
-                                Back
-                            </Link>
-                    </div>
-                    )}
-                    <div className="container mt-4">
-                        {loading ? (
-                            <p className="text-primary">Loading...</p>
-                        ) : error ? (
-                            <p className="text-danger">{error}</p>
-                        ) : (
-                            <div className="card shadow-lg">
-                                <img
-                                    src={`http://127.0.0.1:8000${playground.image}`}
-                                    className="card-img-top"
-                                    alt={playground.name}
-                                    style={{ height: "300px", objectFit: "cover" }}
-                                />
-                                {isEditing ? (
-                                    <form onSubmit={handleUpdateSubmit} encType="multipart/form-data">
-                                        <div className="card-body">
-                                        <h2 className="card-title">
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                value={updatedPlayground.name}
-                                                onChange={handleUpdateChange}
-                                                className="form-control"
-                                                required
-                                            />
-                                        </h2>
-                                        <p className="card-text">
-                                            <strong>Location:</strong>
-                                            <input
-                                                type="text"
-                                                name="location"
-                                                value={updatedPlayground.location}
-                                                onChange={handleUpdateChange}
-                                                className="form-control"
-                                                required
-                                            />
-                                        </p>
-                                        <p className="card-text">
-                                            <strong>Address:</strong>
-                                            <textarea
-                                                name="address"
-                                                value={updatedPlayground.address}
-                                                onChange={handleUpdateChange}
-                                                className="form-control"
-                                                required
-                                            ></textarea>
-                                        </p>
-                                        <p className="card-text">
-                                            <strong>Time Slot Start:</strong>
-                                            <input
-                                                type="time"
-                                                name="time_slot_start"
-                                                value={updatedPlayground.time_slot_start}
-                                                onChange={handleUpdateChange}
-                                                className="form-control"
-                                                required
-                                            />
-                                        </p>
-                                        <p className="card-text">
-                                            <strong>Time Slot End:</strong>
-                                            <input
-                                                type="time"
-                                                name="time_slot_end"
-                                                value={updatedPlayground.time_slot_end}
-                                                onChange={handleUpdateChange}
-                                                className="form-control"
-                                                required
-                                            />
-                                        </p>
-                                        <p className="card-text">
-                                            <strong>Number of Players:</strong>
-                                            <input
-                                                type="number"
-                                                name="num_players"
-                                                value={updatedPlayground.num_players}
-                                                onChange={handleUpdateChange}
-                                                className="form-control"
-                                                required
-                                            />
-                                        </p>
-                                        <p className="card-text">
-                                            <strong>Platform Type:</strong>
-                                            <select
-                                                name="platform_type"
-                                                value={updatedPlayground.platform_type}
-                                                onChange={handleUpdateChange}
-                                                className="form-control"
-                                                required
-                                            >
-                                                <option value="football">Football Ground</option>
-                                                <option value="cricket">Cricket Ground</option>
-                                                <option value="park">Children’s Park</option>
-                                            </select>
-                                        </p>
-                                        <p className="card-text">
-                                            <strong>Price:</strong>
-                                            <input
-                                                type="number"
-                                                name="price"
-                                                value={updatedPlayground.price}
-                                                onChange={handleUpdateChange}
-                                                className="form-control"
-                                                required
-                                            />
-                                        </p>
-                                        <p className="card-text">
-                                            <strong>Image:</strong>
-                                            <input
-                                                type="file"
-                                                name="image"
-                                                accept="image/*"
-                                                onChange={handleUpdateChange}
-                                                className="form-control"
-                                            />
-                                        </p>
-                                        <button type="submit" className="btn btn-primary">Update</button>
-                                    </div>
-                                </form>
-                                ) : (
-                                    <div className="card-body">
-                                        <h2 className="card-title">{playground.name}</h2>
-                                        <p className="card-text">
-                                            <strong>Location:</strong> {playground.location}
-                                        </p>
-                                        <p className="card-text">
-                                            <strong>Type:</strong> {playground.platform_type}
-                                        </p>
-                                        <p className="card-text text-success fw-bold">
-                                            ₹{playground.price}
-                                        </p>
-                                        {userdetails && userdetails.user_type === "Owner" && (
-                                            <>
-                                                <button className="btn btn-warning" onClick={() => setIsEditing(true)}>
-                                                    Edit
-                                                </button>
-                                                <button className="btn btn-danger ms-2" onClick={handleDelete}>
-                                                    Delete
-                                                </button>
-                                            </>
-                                        )}
-                                    </div>
-                                )}
+                        {userdetails && userdetails.user_type === "Owner" && (
+                            <div className="d-flex justify-content-end mb-3">
+                                    <Link to={`/ownerplay`} className="btn btn-outline-primary">
+                                        Back
+                                    </Link>
                             </div>
                         )}
-                    </div>
-                    <div>
-                        {playground ? <WeatherData2 id={playground.id} /> : <p>Loading playground...</p>}
-                    </div>
-                    <div>
-                        <ReviewComponent playgroundId={id} userToken={userToken} />
+                        {userdetails && userdetails.user_type !== "Owner" && (
+                            <div className="d-flex justify-content-end mb-3">
+                                    <Link to={`/PlaygManagement`} className="btn btn-outline-primary">
+                                        Back
+                                    </Link>
+                            </div>
+                        )}
+                        <div className="owner-func">
+                            {loading ? (
+                                <p className="text-primary">Loading...</p>
+                            ) : error ? (
+                                <p className="text-danger">{error}</p>
+                            ) : (
+                                <div className="owner-playg-details">
+                                    <img
+                                        src={`http://127.0.0.1:8000${playground.image}`}
+                                        className="owner-img-top"
+                                        alt={playground.name}
+                                        style={{ height: "300px", objectFit: "cover" }}
+                                    />
+                                    {isEditing ? (
+                                        <div className="edit-form">
+                                            <form onSubmit={handleUpdateSubmit} encType="multipart/form-data" className="owner-edit">
+                                                <div className="owneredit-form-body">
+                                                <h2 className="owner-edit-details">
+                                                    <strong className="owner-feild">Location:</strong>
+                                                    <input
+                                                        type="text"
+                                                        name="name"
+                                                        value={updatedPlayground.name}
+                                                        onChange={handleUpdateChange}
+                                                        className="form-control"
+                                                        required
+                                                    />
+                                                </h2>
+                                                <p className="owner-edit-details">
+                                                    <strong className="owner-feild">Location:</strong>
+                                                    <input
+                                                        type="text"
+                                                        name="location"
+                                                        value={updatedPlayground.location}
+                                                        onChange={handleUpdateChange}
+                                                        className="form-control"
+                                                        required
+                                                    />
+                                                </p>
+                                                <p className="owner-edit-details">
+                                                    <strong className="owner-feild">Address:</strong>
+                                                    <textarea
+                                                        name="address"
+                                                        value={updatedPlayground.address}
+                                                        onChange={handleUpdateChange}
+                                                        className="form-control"
+                                                        required
+                                                    ></textarea>
+                                                </p>
+                                                <p className="owner-edit-details">
+                                                    <strong className="owner-feild">Time Slot Start:</strong>
+                                                    <input
+                                                        type="time"
+                                                        name="time_slot_start"
+                                                        value={updatedPlayground.time_slot_start}
+                                                        onChange={handleUpdateChange}
+                                                        className="form-control"
+                                                        required
+                                                    />
+                                                </p>
+                                                <p className="owner-edit-details">
+                                                    <strong className="owner-feild">Time Slot End:</strong>
+                                                    <input
+                                                        type="time"
+                                                        name="time_slot_end"
+                                                        value={updatedPlayground.time_slot_end}
+                                                        onChange={handleUpdateChange}
+                                                        className="form-control"
+                                                        required
+                                                    />
+                                                </p>
+                                                <p className="owner-edit-details">
+                                                    <strong className="owner-feild">Number of Players:</strong>
+                                                    <input
+                                                        type="number"
+                                                        name="num_players"
+                                                        value={updatedPlayground.num_players}
+                                                        onChange={handleUpdateChange}
+                                                        className="form-control"
+                                                        required
+                                                    />
+                                                </p>
+                                                <p className="owner-edit-details">
+                                                    <strong className="owner-feild">Platform Type:</strong>
+                                                    <select
+                                                        name="platform_type"
+                                                        value={updatedPlayground.platform_type}
+                                                        onChange={handleUpdateChange}
+                                                        className="form-control"
+                                                        required
+                                                    >
+                                                        <option value="football">Football Ground</option>
+                                                        <option value="cricket">Cricket Ground</option>
+                                                        <option value="park">Children’s Park</option>
+                                                    </select>
+                                                </p>
+                                                <p className="owner-edit-details">
+                                                    <strong className="owner-feild">Price:</strong>
+                                                    <input
+                                                        type="number"
+                                                        name="price"
+                                                        value={updatedPlayground.price}
+                                                        onChange={handleUpdateChange}
+                                                        className="form-control"
+                                                        required
+                                                    />
+                                                </p>
+                                                <p className="owner-edit-details">
+                                                    <strong className="owner-feild">Image:</strong>
+                                                    <input
+                                                        type="file"
+                                                        name="image"
+                                                        accept="image/*"
+                                                        onChange={handleUpdateChange}
+                                                        className="form-control"
+                                                    />
+                                                </p>
+                                                <button type="submit" className="owner-edit-sub">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    ) : (
+                                        <div className="owner-alter-option">
+                                            <h2 className="owner-playg-details">{playground.name}</h2>
+                                            <p className="owner-playg-details">
+                                                <strong>Location:</strong> {playground.location}
+                                            </p>
+                                            <p className="owner-playg-details">
+                                                <strong>Type:</strong> {playground.platform_type}
+                                            </p>
+                                            <p className="owner-playg-details">
+                                                ₹{playground.price}
+                                            </p>
+                                            {userdetails && userdetails.user_type === "Owner" && (
+                                                <>
+                                                    <button className="btn-owner btn-warning" onClick={() => setIsEditing(true)}>
+                                                        Edit
+                                                    </button>
+                                                    <button className="btn-owner btn-danger ms-2" onClick={handleDelete}>
+                                                        Delete
+                                                    </button>
+                                                </>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                        <div className="owner-func">
+                            {playground ? <WeatherData2 id={playground.id} /> : <p>Loading playground...</p>}
+                        </div>
+                        <div className="owner-func">
+                            <ReviewComponent playgroundId={id} userToken={userToken} />
+                        </div>
                     </div>
                 </div>
             </div>

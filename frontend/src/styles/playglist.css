@@ -1,0 +1,201 @@
+.container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.main-head h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.main-head h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    border-radius: 2px;
+}
+
+.Playg-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.playg {
+    transition: all 0.3s ease;
+}
+
+.playg:hover {
+    transform: translateY(-5px);
+}
+
+.card-playg {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-playg:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.card-body {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    position: relative;
+    padding-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #4f46e5, #10b981);
+    border-radius: 3px;
+}
+
+.card-details {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    line-height: 1.5;
+}
+
+.card-details strong {
+    color: #2d3748;
+    font-weight: 600;
+    min-width: 70px;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+}
+
+/* Price specific styling */
+.card-details:last-child {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #10b981;
+    margin-top: 0.5rem;
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    border-left: 3px solid #10b981;
+}
+
+/* Type specific styling */
+.card-details:nth-last-child(2) {
+    color: #6b46c1;
+}
+
+.card-details:nth-last-child(2) strong {
+    color: #6b46c1;
+}
+
+/* Location specific styling */
+.card-details:first-of-type {
+    color: #3182ce;
+}
+
+.card-details:first-of-type strong {
+    color: #3182ce;
+}
+.item {
+    text-decoration: none;
+    color: inherit;
+}
+
+.text-center {
+    text-align: center;
+    padding: 2rem;
+}
+
+.text-primary {
+    color: #3498db !important;
+    font-size: 1.2rem;
+}
+
+.text-danger {
+    color: #e74c3c !important;
+    font-size: 1.2rem;
+}
+
+.text-muted {
+    color: #95a5a6 !important;
+    font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .Playg-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .main-head h2 {
+        font-size: 2rem;
+    }
+    
+    .card-title {
+        font-size: 1.2rem;
+    }
+    
+    .card-details {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .Playg-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-head h2 {
+        font-size: 1.8rem;
+    }
+}

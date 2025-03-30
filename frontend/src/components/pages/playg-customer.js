@@ -4,6 +4,7 @@ import DashHead from "../reuse/header2";
 import Sidebar from "../reuse/user-side";
 import '../../styles/user-dash.css';  
 import '../../styles/head-common.css'; 
+import '../../styles/playglist.css'; 
 
 const CustomerPlayg = () => {
     const [playgrounds, setPlaygrounds] = useState([]);
@@ -53,53 +54,50 @@ const CustomerPlayg = () => {
             <div className='dashboard-container'>
                 <Sidebar />
                 <div className='dashboard-content'>
-                    <h2>Available Playgrounds</h2>
-
-                    {loading ? (
-                                <p className="text-center text-primary">Loading playgrounds...</p>
-                              ) : error ? (
-                                <p className="text-center text-danger">{error}</p>
-                              ) : playgrounds.length === 0 ? (
-                                <p className="text-center text-muted">No playgrounds registered yet.</p>
-                              ) : (
-                                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                                  {playgrounds.map((playground) => (
-                                    <div className="col" key={playground.id}>
-                                      <Link to={`/playground-customer/${playground.id}`} className="text-decoration-none"
-                                      style={{ backgroundColor: "#ff9800", borderRadius: "10px", padding: "10px", display: "block" }}
-                                      >
-                                      
-                                        <div className="card h-100 custom-card">
-                                          <img
-                                            src={`http://127.0.0.1:8000${playground.image}`}
-                                            className="card-img-top"
-                                            alt={playground.name}
-                                            style={{ height: '200px', objectFit: 'cover' }}
-                                          />
-                                          {console.log("de link",playground.image)}
-                                          <div className="card-body">
-                                            <h5 className="card-title text-dark">{playground.name}</h5>
-                                            <p className="card-text">
-                                              <strong>Location:</strong> {playground.location}
-                                            </p>
-                                            <p className="card-text">
-                                              <strong>Lat:</strong> {playground.latitude}
-                                            </p>                                            <p className="card-text">
-                                              <strong>Long:</strong> {playground.longitude}
-                                            </p>
-                                            <p className="card-text">
-                                              <strong>Type:</strong> {playground.platform_type}
-                                            </p>
-                                            <p className="card-text fw-bold text-success">
-                                              ₹{playground.price}
-                                            </p>
+                  <div className="container">
+                    <div className="main-head">
+                      <h2>Available Playgrounds</h2>
+                    </div>
+                    <div className="playgrounds">
+                      {loading ? (
+                                  <p className="text-center text-primary">Loading playgrounds...</p>
+                                ) : error ? (
+                                  <p className="text-center text-danger">{error}</p>
+                                ) : playgrounds.length === 0 ? (
+                                  <p className="text-center text-muted">No playgrounds registered yet.</p>
+                                ) : (
+                                  <div className="Playg-list">
+                                    {playgrounds.map((playground) => (
+                                      <div className="playg" key={playground.id}>
+                                        <Link to={`/playground-customer/${playground.id}`} className="item">
+                                        
+                                          <div className="card-playg">
+                                            <img
+                                              src={`http://127.0.0.1:8000${playground.image}`}
+                                              className="card-img-top"
+                                              alt={playground.name}
+                                            />
+                                            {console.log("de link",playground.image)}
+                                            <div className="card-body">
+                                              <h5 className="card-title">{playground.name}</h5>
+                                              <p className="card-details">
+                                                <strong>Location:</strong> {playground.location}
+                                              </p>
+                                              <p className="card-details">
+                                                <strong>Type:</strong> {playground.platform_type}
+                                              </p>
+                                              <p className="card-details">
+                                                ₹{playground.price}
+                                              </p>
+                                            </div>
                                           </div>
-                                        </div>
-                                      </Link>
-                                    </div>
-                                  ))}
-                                </div>
-                              )}
+                                        </Link>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                      </div>
+                  </div>
                 </div>
             </div>
         </div>

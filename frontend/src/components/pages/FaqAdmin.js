@@ -116,9 +116,9 @@ function FAQAdmin() {
             <div className="head-customer">
                 <DashHead />
             </div>
-            <div className="dashboard-container d-flex">
+            <div className="dashboard-container">
                 <Sidebar3 />
-                <div className="dashboard-content container mt-4">
+                <div className="dashboard-content ">
                     <h2 className="mb-4 text-primary">FAQ - Admin</h2>
 
                     {/* FAQ Form */}

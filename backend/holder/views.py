@@ -26,6 +26,8 @@ from django.views import View
 from .models import Playground
 import requests
 
+from .models import GoogleFitData
+from django.utils.timezone import now, timedelta
 
 # API view to register a new Playground
 class PlaygroundRegisterView(APIView):
@@ -413,6 +415,93 @@ def fetch_google_fit_view(request):
 
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
+    
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def fetch_and_store_google_fit_view(request):
+    user = request.user
+
+    # Check if data was recorded within the last 24 hours
+    last_record = GoogleFitData.objects.filter(user=user).order_by('-recorded_at').first()
+    if last_record and last_record.recorded_at > now() - timedelta(hours=24):
+        print("Returning message: Data already recorded in the last 24 hours")  # Debugging print
+        return JsonResponse({"status": "success", "message": "Data already recorded in the last 24 hours"}, status=200)
+
+    try:
+        # Fetch fresh Google Fit data
+        fit_data = fetch_all_google_fit_data(user.id)  
+        print("Fetched Data:", fit_data)
+
+        # Store new data in the database
+        new_record = GoogleFitData.objects.create(
+            user=user,
+            steps=fit_data.get("Steps"),
+            calories_burned=fit_data.get("Calories Burned"),
+            active_minutes=fit_data.get("Active Minutes"),
+            heart_rate=fit_data.get("Heart Rate"),
+            distance_moved=fit_data.get("Distance Moved"),
+            move_minutes=fit_data.get("Move Minutes"),
+            weight=fit_data.get("Weight"),
+            height=fit_data.get("Height"),
+            sleep_data=fit_data.get("Sleep Data"),
+            activity_sessions=fit_data.get("Activity Sessions")
+        )
+
+        return JsonResponse({
+        "status": "success",
+        "message": "Data stored successfully",
+        "data": {
+            "id": new_record.id,
+            "steps": new_record.steps,
+            "calories_burned": new_record.calories_burned,
+            "active_minutes": new_record.active_minutes,
+            "heart_rate": new_record.heart_rate,
+            "distance_moved": new_record.distance_moved,
+            "move_minutes": new_record.move_minutes,
+            "weight": new_record.weight,
+            "height": new_record.height,
+            "sleep_data": new_record.sleep_data,
+            "activity_sessions": new_record.activity_sessions,
+            "recorded_at": new_record.recorded_at.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            }, status=201)
+    
+    except Exception as e:
+        return JsonResponse({"status": "error", "message": str(e)}, status=500)
+    
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def fetch_last_five_days_data(request):
+    user = request.user
+    five_days_ago = now() - timedelta(days=5)
+    
+    # Fetch last 5 days of data
+    records = GoogleFitData.objects.filter(user=user, recorded_at__gte=five_days_ago).order_by('-recorded_at')
+
+    if not records:
+        return JsonResponse({"status": "error", "message": "No data found for the last 5 days"}, status=404)
+
+    data = [
+        {
+            "date": record.recorded_at.strftime("%Y-%m-%d"),
+            "steps": record.steps,
+            "calories_burned": record.calories_burned,
+            "heart_rate": record.heart_rate,
+            "activity_sessions": record.activity_sessions,
+            "distance_moved": record.distance_moved,   # 🔹 Include distance_moved
+            "move_minutes": record.move_minutes,       # 🔹 Include move_minutes
+            "weight": record.weight,                   # 🔹 Include weight
+            "height": record.height,                   # 🔹 Include height
+            "sleep_data": record.sleep_data            # 🔹 Include sleep_data
+        }
+        for record in records
+    ]
+
+    return JsonResponse({"status": "success", "data": data}, status=200)
+
+
     
 
 @api_view(['POST'])

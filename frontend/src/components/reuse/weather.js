@@ -54,60 +54,60 @@ function WeatherData() {
   }, []);
 
   return (
-    <div className="container my-4">
+    <div className="container">
       {error && <div className="alert alert-danger">{error}</div>}
 
       {/* Display current date and time */}
-      <div className="mb-3">
-        <h4 className="text-center">Current Date and Time: {currentDateTime}</h4>
+      <div className="current-date">
+        <h4 className="text-date">Current Date and Time: {currentDateTime}</h4>
       </div>
 
       {/* Current weather */}
       {weather ? (
-        <div className="card shadow-lg mb-4">
-          <div className="card-body">
-            <h2 className="card-title text-center">
+        <div className="card-weather">
+          <div className="card-body-weather">
+            <h2 className="card-title-weather">
               {weather.name}, {weather.sys?.country}
             </h2>
             <div className="row">
-              <div className="col-md-6">
-                <p><strong>Temperature:</strong> {weather.main.temp}°C</p>
-                <p><strong>Feels Like:</strong> {weather.main.feels_like}°C</p>
-                <p><strong>Humidity:</strong> {weather.main.humidity}%</p>
-                <p><strong>Pressure:</strong> {weather.main.pressure} hPa</p>
-                <p><strong>Wind Speed:</strong> {weather.wind.speed} m/s</p>
+              <div className="col">
+                <p className='current-weather'><strong>Temperature:</strong> {weather.main.temp}°C</p>
+                <p className='current-weather'><strong>Feels Like:</strong> {weather.main.feels_like}°C</p>
+                <p className='current-weather'><strong>Humidity:</strong> {weather.main.humidity}%</p>
+                <p className='current-weather'><strong>Pressure:</strong> {weather.main.pressure} hPa</p>
+                <p className='current-weather'><strong>Wind Speed:</strong> {weather.wind.speed} m/s</p>
               </div>
-              <div className="col-md-6">
-                <p><strong>Wind Direction:</strong> {weather.wind.deg}°</p>
-                <p><strong>Cloud Coverage:</strong> {weather.clouds.all}%</p>
-                <p><strong>Visibility:</strong> {weather.visibility / 1000} km</p>
-                <p><strong>Weather:</strong> {weather.weather[0]?.description}</p>
-                <img src={`http://openweathermap.org/img/wn/${weather.weather[0]?.icon}.png`} alt="weather-icon" className="img-fluid" />
+              <div className="col">
+                <p className='current-weather'><strong>Wind Direction:</strong> {weather.wind.deg}°</p>
+                <p className='current-weather'><strong>Cloud Coverage:</strong> {weather.clouds.all}%</p>
+                <p className='current-weather'><strong>Visibility:</strong> {weather.visibility / 1000} km</p>
+                <p className='current-weather'><strong>Weather:</strong> {weather.weather[0]?.description}</p>
+                <img src={`http://openweathermap.org/img/wn/${weather.weather[0]?.icon}.png`} alt="weather-icon" className="img-weather" />
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <p className="text-center">Loading current weather data...</p>
+        <p className="text-loading">Loading current weather data...</p>
       )}
 
             {/* Next 48-Hour Forecast */}
             {futureWeather.length > 0 ? (
-            <div className="card shadow-lg mb-4">
+            <div className="card-nextweather">
                 <div className="card-body">
-                    <h2 className="card-title text-center">Next 48 Hours Forecast</h2>
+                    <h2 className="card-txt-next-weather">Next 48 Hours Forecast</h2>
                     <div className="forecast-container">
                         {futureWeather.map((hourly, index) => (
                             <div className="forecast-item" key={index}>
-                                <div className="card text-center">
-                                    <div className="card-body">
-                                        <h6>{new Date(hourly.dt * 1000).toLocaleString()}</h6>
-                                        <p><strong>Temp:</strong> {hourly.main.temp}°C</p>
-                                        <p><strong>Weather:</strong> {hourly.weather[0]?.description}</p>
+                                <div className="nested-card">
+                                    <div className="card-body2">
+                                        <h6 className='nxt-weather-head'>{new Date(hourly.dt * 1000).toLocaleString()}</h6>
+                                        <p className='nxt-weather-data'><strong>Temp:</strong> {hourly.main.temp}°C</p>
+                                        <p className='nxt-weather-data'><strong>Weather:</strong> {hourly.weather[0]?.description}</p>
                                         <img 
                                             src={`http://openweathermap.org/img/wn/${hourly.weather[0]?.icon}.png`} 
                                             alt="weather-icon" 
-                                            className="img-fluid"
+                                            className="img-wather"
                                         />
                                     </div>
                                 </div>
@@ -117,10 +117,10 @@ function WeatherData() {
                 </div>
             </div>
             ) : (
-                <p className="text-center">Loading future weather data...</p>
+                <p className="text-loading">Loading future weather data...</p>
             )}
 
-{futureWeather.length === 0 && <p className="text-center">Loading future weather data...</p>}
+  {futureWeather.length === 0 && <p className="text-loading">Loading future weather data...</p>}
 
 
     </div>
