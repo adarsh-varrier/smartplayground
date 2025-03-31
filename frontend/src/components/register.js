@@ -73,7 +73,7 @@ const Register = () => {
     if (!formData.email) {
       newErrors.email = "Email is required.";
       isValid = false;
-    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z]+\.[a-zA-Z]{2,6}$/.test(formData.email))   {
+    } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]{2,}(\.[a-zA-Z]{2,})+$/.test(formData.email))   {
       newErrors.email = "Invalid email format.";
       isValid = false;
     }
@@ -96,6 +96,15 @@ const Register = () => {
       isValid = false;
     } else if (!/(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(formData.password)) {
       newErrors.password = "Password must contain at least 1 uppercase, 1 number, and 1 special character.";
+      isValid = false;
+    }
+
+    // Age validation
+    if (!formData.age) {
+      newErrors.age = "Age is required.";
+      isValid = false;
+    } else if (parseInt(formData.age) < 15) {
+      newErrors.age = "You must be at least 15 years old.";
       isValid = false;
     }
 
@@ -238,6 +247,18 @@ const Register = () => {
                     ))}
                   </ul>
                 )}
+              </div>
+              
+              <div className="mb-3">
+                <label className="form-label">Age</label>
+                <input
+                  type="number"
+                  name="age"
+                  className="form-control"
+                  value={formData.age}
+                  onChange={handleChange}
+                />
+                {errors.age && <small className="text-danger">{errors.age}</small>}
               </div>
 
               <div className="mb-3">

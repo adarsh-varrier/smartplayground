@@ -28,6 +28,7 @@ import requests
 
 from .models import GoogleFitData
 from django.utils.timezone import now, timedelta
+from django.db.models import Q
 
 # API view to register a new Playground
 class PlaygroundRegisterView(APIView):
@@ -132,6 +133,18 @@ class PlaygroundCustomerView(APIView):
 
             # Alternatively, if there are booking records, you can filter based on those
             # playgrounds = Playground.objects.filter(is_available=True)
+
+            # Get search query from request parameters
+            search_query = request.query_params.get('search', '').strip()
+            
+            # Start with all playgrounds
+            playgrounds = Playground.objects.all()
+            
+            # Apply search filter if query exists
+            if search_query:
+                playgrounds = playgrounds.filter(
+                    Q(name__icontains=search_query) | 
+                    Q(location__icontains=search_query))
 
             if not playgrounds.exists():
                 return Response({"detail": "No playgrounds found for this customer."}, status=status.HTTP_404_NOT_FOUND)

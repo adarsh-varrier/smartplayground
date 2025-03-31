@@ -182,8 +182,8 @@ function Playgbooking() {
             <Sidebar/>
             <div className="dashboard-content">
                     <p className="text-center display-4">Playground Details</p>
-                    <div className="d-flex justify-content-end mb-3">
-                        <Link to={`/playground-customer/${playground.id}`} className="btn btn-outline-primary">
+                    <div className="">
+                        <Link to={`/playground-customer/${playground.id}`} className="playg-details-back">
                             Back
                         </Link>
                     </div>

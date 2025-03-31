@@ -57,8 +57,8 @@ function PlaygroundDetail2() {
                         <div className='container'>
                        
                             <p className="cust-view-text">Playground Details</p>
-                            <div className="d-flex justify-content-end mb-3">
-                                <Link to={`/playglist`} className="btn btn-outline-primary">
+                            <div className="">
+                                <Link to={`/playglist`} className="playg-details-back">
                                     Back
                                 </Link>
                             </div>

@@ -26,6 +26,99 @@
     border-radius: 2px;
 }
 
+
+/* Search Field Container */
+.playg-search-field {
+    margin: 20px 0;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Search Form */
+.search-form-playg {
+    width: 100%;
+}
+
+/* Search Container */
+.search-container-playg {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+/* Search Input */
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #4a89dc;
+    box-shadow: 0 0 0 2px rgba(74, 137, 220, 0.2);
+}
+
+/* Search Button */
+.search-button-playg {
+    padding: 12px 24px;
+    background-color: #4a89dc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button-playg:hover {
+    background-color: #3a70c2;
+}
+
+.search-button-playg:active {
+    background-color: #2a60b2;
+}
+
+/* Clear Button */
+.clear-button {
+    padding: 12px 16px;
+    background-color: #f5f5f5;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.clear-button:hover {
+    background-color: #eaeaea;
+    color: #333;
+}
+
+.clear-button:active {
+    background-color: #ddd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-container-playg {
+        flex-direction: column;
+    }
+    
+    .search-input,
+    .search-button-playg,
+    .clear-button {
+        width: 100%;
+    }
+}
+
+
+
 .Playg-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

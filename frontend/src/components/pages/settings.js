@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../reuse/user-side";
-import { Link } from "react-router-dom";
 import Sidebar2 from "../reuse/owner-side";
 import Sidebar3 from "../reuse/admin-side";
+import DashHead from "../reuse/header2";
 
 const Settings = () => {
   const [userdetails, setUserDetails] = useState(null);
@@ -111,17 +111,7 @@ const Settings = () => {
   return (
     <div>
       <div className='head-customer'>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div className="container-fluid">
-            <Link className="navbar-brand" to="/">SMARTPLAY</Link>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-auto"></ul>
-            </div>
-          </div>
-        </nav>
+          <DashHead/>
       </div>
       <div className='dashboard-container'>
       {userdetails ? (

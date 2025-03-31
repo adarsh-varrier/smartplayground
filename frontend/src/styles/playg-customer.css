@@ -7,6 +7,40 @@
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
+/* Alternative more prominent style */
+.playg-details-back {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 20px 0;
+    background-color: #4a89dc;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.playg-details-back:hover {
+    background-color: #3a70c2;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    text-decoration: none;
+}
+
+.playg-details-back:active {
+    background-color: #2a60b2;
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.playg-details-back::before {
+    content: "← ";
+    margin-right: 8px;
+    font-weight: bold;
+}
+
 .cust-view-text {
     font-size: 2.5rem;
     font-weight: 700;
