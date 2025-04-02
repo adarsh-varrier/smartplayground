@@ -5,6 +5,7 @@ import '../styles/head-common.css';
  
 import WeatherData from './reuse/weather';
 import DashHead from './reuse/header2';
+import RecentBooking from './reuse/recent-booking';
 
 function CustomerDashboard() {
    return (
@@ -18,6 +19,9 @@ function CustomerDashboard() {
               <h2>Customer Dashboard</h2>            
                 <div>
                   <WeatherData/>
+                </div>
+                <div>
+                  <RecentBooking/>
                 </div>
             </div>
         </div>

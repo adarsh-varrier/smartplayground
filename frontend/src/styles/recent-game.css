@@ -1,0 +1,77 @@
+.recent-booked-status {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.booked-status-head {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.message-booked {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+.recent-booked-event ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recent-booked-event ul li {
+    padding: 10px;
+    font-size: 1rem;
+    background: #ecf0f1;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playground-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s ease-in-out;
+}
+
+.playground-link:hover {
+    transform: scale(1.02);
+}
+
+.playground-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .recent-booked-status {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .booked-status-head {
+        font-size: 1.2rem;
+    }
+
+    .message-booked {
+        font-size: 0.9rem;
+    }
+
+    .recent-booked-event ul li {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}

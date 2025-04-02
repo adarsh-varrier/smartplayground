@@ -61,6 +61,13 @@ const Settings = () => {
     e.preventDefault();
 
     // Password validation
+    if (editForm.password.length < 8) {
+      setError("Password must be at least 8 characters.");
+      return;
+    } else if (!/(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(editForm.password)) {
+      setError("Password must contain at least 1 uppercase, 1 number, and 1 special character.");
+      return;
+    }
     if (editForm.password !== editForm.confirmPassword) {
       setError("Passwords do not match!");
       return;

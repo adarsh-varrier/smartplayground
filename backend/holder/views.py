@@ -30,6 +30,11 @@ from .models import GoogleFitData
 from django.utils.timezone import now, timedelta
 from django.db.models import Q
 
+import joblib
+import pandas as pd
+from collections import Counter
+from .utils import send_notification
+
 # API view to register a new Playground
 class PlaygroundRegisterView(APIView):
     permission_classes = [IsAuthenticated]
@@ -279,6 +284,43 @@ class BookingDetailView(APIView):
 
         return Response(serialized_data, status=status.HTTP_200_OK)
     
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def check_recent_event(request):
+    user = request.user
+    current_time = now()
+    next_24_hours = current_time + timedelta(hours=24)
+
+    # Filter bookings where the event is scheduled within the next 24 hours
+    upcoming_booking = Booking.objects.filter(
+        user=user,
+        date__gte=current_time.date(),  # Ensure the date is today or later
+        date__lte=next_24_hours.date()  # Ensure the event is within the next 24 hours
+    ).order_by('date', 'time_slot').first()  # Get the closest upcoming booking
+
+    if upcoming_booking:
+        # Send notification to user
+        send_notification(
+            user=user,
+            message=f"Your game at {upcoming_booking.playground.name} is scheduled for {upcoming_booking.date} at {upcoming_booking.time_slot}."
+        )
+
+    if upcoming_booking:
+        return Response({
+            "status": "success",
+            "playground_id": upcoming_booking.playground.id,
+            "playground_image": upcoming_booking.playground.image.url,
+            "playground_name": upcoming_booking.playground.name,
+            "ticket_number": upcoming_booking.ticket_number,
+            "date": upcoming_booking.date.strftime('%Y-%m-%d'),
+            "time_slot": upcoming_booking.time_slot.strftime('%H:%M')
+        })
+    else:
+        return Response({"status": "no_upcoming_booking"})
+
+
+    
 class OwnerBookingDetailView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -482,14 +524,17 @@ def fetch_and_store_google_fit_view(request):
     
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
-    
+
+
+model_path = r"E:\smartplay\backend\holder\mlmodel\healthrefined2.pkl"
+model = joblib.load(model_path)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def fetch_last_five_days_data(request):
     user = request.user
     five_days_ago = now() - timedelta(days=5)
-    
+
     # Fetch last 5 days of data
     records = GoogleFitData.objects.filter(user=user, recorded_at__gte=five_days_ago).order_by('-recorded_at')
 
@@ -500,22 +545,64 @@ def fetch_last_five_days_data(request):
         {
             "date": record.recorded_at.strftime("%Y-%m-%d"),
             "steps": record.steps,
-            "calories_burned": record.calories_burned,
+            "distance_moved": round(record.distance_moved / 1000, 2),
+            "calories_burned": int(record.calories_burned),
             "heart_rate": record.heart_rate,
-            "activity_sessions": record.activity_sessions,
-            "distance_moved": record.distance_moved,   # 🔹 Include distance_moved
-            "move_minutes": record.move_minutes,       # 🔹 Include move_minutes
-            "weight": record.weight,                   # 🔹 Include weight
-            "height": record.height,                   # 🔹 Include height
-            "sleep_data": record.sleep_data            # 🔹 Include sleep_data
+            "activity_sessions": record.activity_sessions,  
         }
         for record in records
     ]
+    print("Fetched Data:", data)
 
-    return JsonResponse({"status": "success", "data": data}, status=200)
+    # Ensure correct feature names
+    unseen_data = pd.DataFrame([{
+        'TotalSteps': record['steps'],
+        'TotalDistance': record['distance_moved'],
+        'Calories': record['calories_burned'],
+        'AvgHeartRate': record['heart_rate'],
+        'TotalActiveMinutes': record['activity_sessions']
+    } for record in data])
 
+    # Convert data types
+    unseen_data = unseen_data.astype({
+        'TotalSteps': 'int',
+        'TotalDistance': 'float',
+        'Calories': 'int',
+        'AvgHeartRate': 'float',
+        'TotalActiveMinutes': 'int'
+    })
 
-    
+    # Handle missing values
+    unseen_data.fillna({
+        'TotalSteps': 0,
+        'TotalDistance': 0.0,
+        'Calories': 0,
+        'AvgHeartRate': 70,
+        'TotalActiveMinutes': 0
+    }, inplace=True)
+
+    print("Processed Data for Prediction:", unseen_data)
+
+    # Predict health status
+    predicted_health_status = model.predict(unseen_data)
+    print("Predictions:", predicted_health_status)
+
+    # Get the most frequent prediction
+    status_counts = Counter(predicted_health_status)
+    final_status = status_counts.most_common(1)[0][0]
+
+        # 🚨 **Send Notification if Unhealthy**
+    if final_status.lower() == "unhealthy":
+        message = "Warning: Your recent activity data indicates an unhealthy status. Consider increasing your physical activity and monitoring your health."
+        send_notification(user, message)
+
+    return JsonResponse({
+        "status": "success",
+        "data": data,
+        "predictions": predicted_health_status.tolist(),
+        "final_health_status": final_status
+    }, status=200)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

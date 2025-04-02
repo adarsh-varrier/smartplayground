@@ -24,6 +24,7 @@ urlpatterns = [
     path('api/playgrounds/<int:playground_id>/booked-slots/', BookedSlotsView.as_view(), name='booked-slots'),
     path('api/bookings/', BookingDetailView.as_view(), name='all_bookings'),
     path('api/confirmation/', OwnerBookingDetailView.as_view(), name='booked_user'),
+    path('api/check-recent-event/', views.check_recent_event, name='recent_event'),
     path('api/update-booking/<str:ticket_number>/', UpdateBookingStatusView.as_view(), name='update_booking'),
     path('api/notifications/', NotificationListView.as_view(), name='notification'),   
     path("api/notifications/<int:notification_id>/", DeleteNotifi.as_view(), name="delete-notification"),
