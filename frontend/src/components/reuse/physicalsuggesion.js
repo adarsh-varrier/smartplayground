@@ -78,7 +78,7 @@ const PhysicalSuggesion = () => {
         </div>
       {/* Last 5 Days Data */}
         <div className="row">
-            <h2>Recent 5 Activities in SmartPlay </h2>
+            <h2>Recent Activities in SmartPlay </h2>
         </div>
         <div className="row"> 
             {lastFiveDays.length > 0 ? (

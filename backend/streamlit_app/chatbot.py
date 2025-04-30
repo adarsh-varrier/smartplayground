@@ -33,6 +33,7 @@ responses = {
     "skin protection tips": "Our platform alerts you when the UV index is too high. Use sunscreen, wear protective clothing, and avoid direct sunlight during peak hours.",
     "health and diet tips": "Based on your activity, we provide diet suggestions. Ensure proper hydration, balance protein intake, and adjust nutrition for better performance.",
     "faq help": "Ask any question in the FAQ section. If similar queries exist, you'll get an instant answer. Otherwise, you can submit new queries for support.",
+    "Smartplay": "smart and interactive web application that helps users discover and safely engage in outdoor playground activities."
 }
 
 # Function to match user input using fuzzy logic and NLP
